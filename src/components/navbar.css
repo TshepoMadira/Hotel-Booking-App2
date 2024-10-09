@@ -1,7 +1,8 @@
 .navbar {
-    background-color: #333;
+    background-color: black;
     padding: 1em;
     text-align: center;
+    height: 60px;
   }
   
   .navbar ul {
@@ -17,7 +18,7 @@
   }
   
   .navbar a {
-    color: #fff;
+    color: #a09f9d;
     text-decoration: none;
   }
   
@@ -26,7 +27,7 @@
   }
   
   .btn {
-    background-color: #4CAF50;
+    background-color: #726555;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -35,6 +36,6 @@
   }
   
   .btn:hover {
-    background-color: #3e8e41;
+    background-color: black;
     color: #fff;
   }
