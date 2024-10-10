@@ -1,13 +1,12 @@
 import React from 'react';
 import './homepage.css';
-import Navbar from '../components/navbar';
 import { Link } from 'react-router-dom';
 
 
 const Homepage = () => {
   return (
     <div className="home-page">
-      <Navbar />
+      
       <header className="hero">
   <img src="src\assets\Unique Dubai Honeymoon Hotels For Your Bucket List!.jpeg" alt="Dreamscape Hotel" className="hero-image" />
   <div className="overlay">

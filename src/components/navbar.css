@@ -10,7 +10,8 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    margin-top: 20px;
   }
   
   .navbar li {
@@ -20,6 +21,7 @@
   .navbar a {
     color: #a09f9d;
     text-decoration: none;
+    
   }
   
   .navbar a:hover {

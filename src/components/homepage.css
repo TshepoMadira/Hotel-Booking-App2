@@ -18,4 +18,29 @@
     color: white; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
   }
+
+
+  .gallery {
+    text-align: center; 
+    padding: 20px; 
+  }
+  
+  .gallery h2 {
+    margin-bottom: 20px; 
+    font-size: 2em; 
+  }
+  
+  .gallery-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .gallery-grid img {
+    max-width: 300px; 
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
   
