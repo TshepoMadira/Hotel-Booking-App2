@@ -1,3 +1,7 @@
+.home-page{
+  background-color: #3b3b3a;
+}
+
 .hero {
     position: relative;
     text-align: center;
@@ -42,5 +46,54 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  
+
+
+
+  .testimonials, .special-offers, .location-highlights, .booking-section {
+    padding: 20px;
+    background: #f9f9f9;
+    margin: 20px 0;
+  }
+  
+  .testimonial-carousel blockquote {
+    margin: 10px 0;
+    font-style: italic;
+  }
+  
+  .offer-cards {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .offer-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 30%;
+    text-align: center;
+  }
+  
+  .location-highlights ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .booking-section {
+    text-align: center;
+  }
+  
+  .btn-secondary {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+  
   
   
