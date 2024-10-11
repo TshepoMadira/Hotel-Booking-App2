@@ -1,0 +1,46 @@
+.gallery-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 250px; 
+}
+
+.gallery-nav {
+    margin: 20px 0;
+}
+
+.gallery-nav button {
+    margin: 0 1px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+.gallery-nav button:hover{
+    background-color: #767676;
+}
+
+.gallery-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-wrapper {
+    margin: 3px;
+}
+
+.image-wrapper img {
+    max-width: 200px; 
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.image-wrapper img:hover {
+    transform: scale(1.05);
+}

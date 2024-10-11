@@ -146,7 +146,7 @@ const Signup = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
       <div style={{ marginTop: '10px' }}>
-        <a className='forgot-password-link'href="/forgot-password">Forgot Password?</a>
+        <a className='forgot-password-link'href="/forgotpassword">Forgot Password?</a>
       </div>
     </div>
   );

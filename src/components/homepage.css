@@ -1,99 +1,34 @@
-.home-page{
-  background-color: #3b3b3a;
+:root{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+
 }
+
+
+/* .home-page{
+  background-color: #3b3b3a
+} */
 
 .hero {
     position: relative;
     text-align: center;
     overflow: hidden;
   }
-  
   .hero-image {
     width: 100%; 
-    height: 50vh; 
+    height: 75vh; 
     object-fit: cover; 
   }
-  
   .overlay {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
-    color: white; 
+    color: black; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
   }
 
 
-  .gallery {
-    text-align: center; 
-    padding: 20px; 
-  }
-  
-  .gallery h2 {
-    margin-bottom: 20px; 
-    font-size: 2em; 
-  }
-  
-  .gallery-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .gallery-grid img {
-    max-width: 300px; 
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
 
-
-
-  .testimonials, .special-offers, .location-highlights, .booking-section {
-    padding: 20px;
-    background: #f9f9f9;
-    margin: 20px 0;
-  }
-  
-  .testimonial-carousel blockquote {
-    margin: 10px 0;
-    font-style: italic;
-  }
-  
-  .offer-cards {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .offer-card {
-    background: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 30%;
-    text-align: center;
-  }
-  
-  .location-highlights ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .booking-section {
-    text-align: center;
-  }
-  
-  .btn-secondary {
-    background: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-
-  
-  
-  
