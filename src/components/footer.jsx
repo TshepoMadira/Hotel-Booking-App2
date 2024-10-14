@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Footer = () => {
+    const [scrolling, setScrolling] = useState(false);
+
+    const handleScroll = () => {
+        if (window.scrollY > 300) {
+            setScrolling(true);
+        } else {
+            setScrolling(false);
+        }
+    };
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-left">
-                <img src="src/assets/images/Screenshot__2_-removebg-preview.png" alt="Logo" className="logo" />
+                    <img src="src/assets/images/Screenshot__2_-removebg-preview.png" alt="Logo" className="logo" />
                 </div>
                 <div className="footer-right">
                     <Link to="/aboutus">About Us</Link>
@@ -35,6 +56,11 @@ const Footer = () => {
                 </div>
                 <p className="pp">© 2024 Paragon International Limited. All rights reserved.</p>
             </div>
+            {scrolling && (
+                <button className="scroll-to-top" onClick={scrollToTop}>
+                    <i className="fas fa-arrow-up"></i>
+                </button>
+            )}
         </footer>
     );
 };
