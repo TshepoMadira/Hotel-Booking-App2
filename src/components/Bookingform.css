@@ -1,0 +1,88 @@
+.booking-form {
+    background-color: #f5f2e9;
+    border-radius: 10px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    padding: 30px;
+    max-width: 1600px; 
+    margin: 20px auto; 
+    font-family: 'Arial', sans-serif; 
+    
+    
+}
+
+.date-picker {
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 25px; 
+}
+
+.label-Check-In, .label-Check-Out {
+    display: flex; 
+    flex-direction: column; 
+    width: 48%; 
+}
+
+input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 1em;
+    transition: border-color 0.3s; 
+}
+
+input[type="date"]:focus {
+    outline: none; 
+}
+
+.guests-container {
+    margin-bottom: 25px; 
+}
+
+.guests {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.guest-group {
+    display: flex;
+    align-items: center; 
+}
+
+.Label {
+    margin-right: 10px; 
+    font-weight: 500; 
+    color: #333;
+}
+
+button {
+    background-color: #726555; 
+    color: white; 
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1em; 
+}
+
+.number {
+    margin: 0 10px; 
+    font-size: 1.2em; 
+    color: #333; 
+}
+
+.check-availability-button {
+    background-color: #726555; 
+    padding: 10px; 
+    color: white; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+  
+    font-size: 1.1em; 
+    transition: background-color 0.3s; 
+}
+
+.check-availability-button:hover {
+    background-color: #2c2925; 
+}

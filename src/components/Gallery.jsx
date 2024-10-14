@@ -55,11 +55,11 @@ const Gallery = () => {
             </header>
 
             <nav className="gallery-nav">
-                <button onClick={showAll}>Show All</button>
-                <button onClick={() => showCategory('king')}>King Suite</button>
-                <button onClick={() => showCategory('queen')}>Queen Suite</button>
-                <button onClick={() => showCategory('presidential')}>Presidential Suite</button>
-                <button onClick={() => showCategory('amneties')}>Amneties</button>
+                <button className='showall' onClick={showAll}>Show All</button>
+                <button  className='king'onClick={() => showCategory('king')}>King Suite</button>
+                <button  className='queen'onClick={() => showCategory('queen')}>Queen Suite</button>
+                <button  className='presidential'onClick={() => showCategory('presidential')}>Presidential Suite</button>
+                <button  className='amneties'onClick={() => showCategory('amneties')}>Amneties</button>
             </nav>
 
             <div className="gallery-images">
