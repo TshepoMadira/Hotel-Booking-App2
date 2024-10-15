@@ -1,6 +1,6 @@
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css'
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import './App.css';
 import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
 import Login from './components/Login';
@@ -12,16 +12,14 @@ import FAQS from './components/FAQS';
 import ForgotPassword from './components/ForgotPassword';
 import Gallery from './components/Gallery';
 import Footer from './components/footer';
+import BookingPlatform from './components/BookingPlatform';
 
-
-
-
-function App() {
-  
+const App = () => {
+  const location = useLocation();
 
   return (
-    <Router>
-      <Navbar />
+    <>
+      <Navbar isHomepage={location.pathname === '/'} />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
@@ -29,19 +27,13 @@ function App() {
         <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/contactus" element={<Contactus />} />
         <Route path="/termsandconditions" element={<TermsandConditions />} />
-        <Route path="/faqs" element={<FAQS/>} />
-        <Route path="forgotpassword" element={<ForgotPassword />} />
+        <Route path="/faqs" element={<FAQS />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/footer" element={<Footer />} />
-        
-
-     
-
-        
-
+        <Route path="/bookingplatform" element={<BookingPlatform />} />
       </Routes>
-    </Router>
-  )
-}
+    </>
+  );
+};
 
-export default App
+export default App;

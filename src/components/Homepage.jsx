@@ -15,7 +15,7 @@ const Homepage = () => {
         />
         <div className="overlay">
           <h1>DREAMSCAPE HOTEL</h1>
-          <p>Luxury and Comfort</p>
+          <p className='slogan' >Luxury and Comfort</p>
           <button className="btn btn-primary">Book Now</button>
         </div>
       </header>
