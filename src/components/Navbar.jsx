@@ -1,7 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
 import './navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ isHomepage }) => {
   const [scrolling, setScrolling] = useState(false);
 
   const handleScroll = () => {
@@ -13,14 +14,19 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    if (isHomepage) {
+      window.addEventListener('scroll', handleScroll);
+    }
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (isHomepage) {
+        window.removeEventListener('scroll', handleScroll);
+      }
     };
-  }, []);
+  }, [isHomepage]);
 
   return (
-    <nav className={`navbar ${scrolling ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
       <ul>
         <li><a href="#">Signup</a></li>
         <li><a href="#">Gallery</a></li>

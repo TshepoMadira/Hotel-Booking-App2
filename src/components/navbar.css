@@ -1,22 +1,24 @@
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: transparent;
-  color: white; 
+  color: black; 
   transition: background-color 0.3s ease, color 0.3s ease;
   padding: 10px 20px; 
   z-index: 1000;
-  margin-top: 10px;
-  margin-right: 20px;
+  box-shadow: none; 
 }
 
 .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.9); 
+  background-color: #f5f2e9; 
   color: black;
   height: 50px;
-  margin-top: 10px;
+  width: 98%;
+  margin-top: 0.1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
 }
 
 .navbar ul {
@@ -25,6 +27,7 @@
   margin: 0;
   display: flex;
   justify-content: flex-end; 
+  margin-top: 10px;
 }
 
 .navbar li {
@@ -35,6 +38,12 @@
   text-decoration: none;
   color: inherit; 
   transition: color 0.3s ease;
+  font-weight: 500;
+  padding: 8px 12px; 
+}
+
+.navbar a:hover {
+  color: #ffcc00; 
 }
 
 .book-now-btn {
@@ -43,10 +52,37 @@
   border-radius: 5px;
   cursor: pointer;
   background-color: #726555;
- 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
 .book-now-btn:hover {
   background-color: #291905; 
   color: white; 
+  transform: scale(1.05); 
+}
+
+
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column; 
+    align-items: center;
+    position: absolute;
+    top: 60px; 
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none; 
+  }
+
+  .navbar.scrolled ul {
+    display: flex; 
+  }
+
+  .navbar li {
+    margin: 10px 0; 
+  }
+
+  .book-now-btn {
+    width: 100%; 
+  }
 }
