@@ -66,7 +66,9 @@ const BookingPlatform = () => {
         </label>
         <button type="submit">Submit Booking</button>
       </form>
+      
     </div>
+    
   );
 };
 

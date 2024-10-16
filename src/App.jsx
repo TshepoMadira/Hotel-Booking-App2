@@ -11,8 +11,8 @@ import TermsandConditions from './components/TermsandConditions';
 import FAQS from './components/FAQS';
 import ForgotPassword from './components/ForgotPassword';
 import Gallery from './components/Gallery';
-import Footer from './components/footer';
 import BookingPlatform from './components/BookingPlatform';
+import Paypal from './components/Paypal';
 
 const App = () => {
   const location = useLocation();
@@ -31,6 +31,7 @@ const App = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/bookingplatform" element={<BookingPlatform />} />
+        <Route path="/paypal" element={<Paypal />} />
       </Routes>
     </>
   );
