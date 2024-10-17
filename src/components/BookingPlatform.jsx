@@ -98,7 +98,9 @@ const BookingPlatform = () => {
 
         <button type="submit">Confirm Booking</button>
       </form>
+      
     </div>
+    
   );
 };
 
