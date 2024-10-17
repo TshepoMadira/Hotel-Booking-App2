@@ -11,8 +11,13 @@ import TermsandConditions from './components/TermsandConditions';
 import FAQS from './components/FAQS';
 import ForgotPassword from './components/ForgotPassword';
 import Gallery from './components/Gallery';
+
+
 import BookingPlatform from './components/BookingPlatform';
-import Paypal from './components/Paypal';
+import CheckavailabilityRooms from './components/CheckavailabilityRooms';
+import ConfirmBooking from './components/ConfirmBooking';
+import PayPalButton from './components/PayPalButton';
+
 
 const App = () => {
   const location = useLocation();
@@ -31,8 +36,13 @@ const App = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/bookingplatform" element={<BookingPlatform />} />
-        <Route path="/paypal" element={<Paypal />} />
+
+        <Route path="/checkavailabilityrooms" element={<CheckavailabilityRooms />} />
+        <Route path="/confirmbooking" element={<ConfirmBooking />} />
+        <Route path="/paypal" element={<PayPalButton />} />
+
       </Routes>
+
     </>
   );
 };

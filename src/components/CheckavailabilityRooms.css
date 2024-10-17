@@ -1,0 +1,78 @@
+
+.booking-form {
+  background-color: #f5f2e9;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 1600px;
+  margin: 20px auto;
+  font-family: "Arial", sans-serif;
+  margin-top: 100px;
+}
+
+.date-picker {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  margin-bottom: 1px;
+}
+
+.label-Check-In,
+.label-Check-Out {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  margin-bottom: 3px;
+}
+
+input[type="date"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+input[type="date"]:focus {
+  outline: none;
+}
+
+.Label {
+  margin-right: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+button {
+  background-color: #726555;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1em;
+  margin-bottom: 1px;
+}
+
+.number {
+  margin: 0 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.rooms-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.room-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  /* border-radius: 8px; */
+  width: calc(30% - 16px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
