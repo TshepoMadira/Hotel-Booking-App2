@@ -15,7 +15,7 @@ const Aboutus = () => {
 
       <h2>About Us</h2>
       <p className='history'>
-        [Paragon] is a premier destination for travelers seeking comfort and luxury. Our hotel offers a range of amenities to ensure a memorable stay, including [Free wifi for travellers]. Located in the heart of Brits, we are just minutes away from [Harteebeesport Dam].
+        Dreamscape is a premier destination for travelers seeking comfort and luxury. Our hotel offers a range of amenities to ensure a memorable stay, including [Free wifi for travellers]. Located in the heart of Brits, we are just minutes away from [Harteebeesport Dam].
       </p>
 
       <div>

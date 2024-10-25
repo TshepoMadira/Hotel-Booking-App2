@@ -82,6 +82,54 @@
   color: white;
 }
 
+.facilities{
+  color: white;
+  
+}
+
+.amenities {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #032B44;
+  color: #e4d4a6;
+  
+}
+
+.amenities-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.amenities-list li {
+  display: inline-block;
+  margin: 10px 20px;
+  font-size: 15px;
+}
+
+.amenities-list i {
+  font-size: 36px;
+  margin-right: 10px;
+}
+
+
+.btn-secondary {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
