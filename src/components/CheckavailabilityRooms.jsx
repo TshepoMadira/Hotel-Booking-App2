@@ -8,16 +8,9 @@ const CheckavailabilityRooms = () => {
   const today = new Date().toISOString().split("T")[0];
   const [checkInDate, setCheckInDate] = useState(today);
   const [checkOutDate, setCheckOutDate] = useState(today);
-  const [numAdults, setNumAdults] = useState(1);
-  const [numChildren, setNumChildren] = useState(0);
   const [rooms, setRooms] = useState([]);
-
   const navigate = useNavigate();
 
-  const increment = (setter, value) => setter(value + 1);
-  const decrement = (setter, value) => {
-    if (value > 0) setter(value - 1);
-  };
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -29,7 +22,6 @@ const CheckavailabilityRooms = () => {
       }));
       setRooms(roomsList);
     };
-
     fetchRooms();
   }, []);
 
@@ -66,31 +58,7 @@ const CheckavailabilityRooms = () => {
             />
           </label>
         </div>
-        {/* <div className="guests-container">
-          <div className="guests">
-            <div className="guest-group">
-              <label className="Label">Adults</label>
-              <button onClick={() => decrement(setNumAdults, numAdults)}>
-                -
-              </button>
-              <span className="number">{numAdults}</span>
-              <button onClick={() => increment(setNumAdults, numAdults)}>
-                +
-              </button>
-            </div>
-            <div className="guest-group">
-              <label className="Label">Children</label>
-              <button onClick={() => decrement(setNumChildren, numChildren)}>
-                -
-              </button>
-              <span className="number">{numChildren}</span>
-              <button onClick={() => increment(setNumChildren, numChildren)}>
-                +
-              </button>
-            </div>
-          </div>
-        </div> */}
-
+       
         <button
           className="check-availability-button"
           onClick={() =>
@@ -102,17 +70,18 @@ const CheckavailabilityRooms = () => {
           Check Availability
         </button>
       </div>
-
       <div className="rooms-list">
         <h2>Available Rooms</h2>
         <div className="rooms-grid">
           {rooms.length > 0 ? (
             rooms.map((room) => (
               <div key={room.id} className="room-card">
+                 {room.main_image && <img src={room.main_image} alt={room.name} />}
                 <h3>{room.name}</h3>
                 <p>Price: R {room.price}</p>
                 <p>Available: {room.available}</p>
                 <p>{room.description}</p>
+               
                 <button
                   className="book-button"
                   onClick={() => handleBooking(room.id)}

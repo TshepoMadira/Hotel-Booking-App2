@@ -13,6 +13,7 @@ import ForgotPassword from './components/ForgotPassword';
 import Gallery from './components/Gallery';
 
 
+
 import BookingPlatform from './components/BookingPlatform';
 import CheckavailabilityRooms from './components/CheckavailabilityRooms';
 import ConfirmBooking from './components/ConfirmBooking';
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/checkavailabilityrooms" element={<CheckavailabilityRooms />} />
         <Route path="/confirmbooking" element={<ConfirmBooking />} />
         <Route path="/paypal" element={<PayPalButton />} />
+        
 
       </Routes>
 
