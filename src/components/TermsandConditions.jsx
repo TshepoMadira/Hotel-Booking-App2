@@ -10,7 +10,7 @@ const TermsandConditions = () => {
             </header>
             <main className="terms-content">
                 <h2>Effective Date: [19-09-2024]</h2>
-                <p>Welcome to [Paragon Hotel] (“we,” “our,” “us”). By accessing or using our app and services, you agree to comply with and be bound by the following terms and conditions (“Terms”). Please read them carefully.</p>
+                <p>Welcome to Dreamscape (“we,” “our,” “us”). By accessing or using our app and services, you agree to comply with and be bound by the following terms and conditions (“Terms”). Please read them carefully.</p>
 
                 <h2>1. Acceptance of Terms</h2>
                 <p>By using our app, you agree to these Terms and any additional terms and conditions that may apply to specific sections of the app or to products and services available through the app.</p>
@@ -41,7 +41,7 @@ const TermsandConditions = () => {
                 <p>To the fullest extent permitted by law, [Your Company] is not liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the app or any booking, even if we have been advised of the possibility of such damages.</p>
 
                 <h2>9. Governing Law</h2>
-                <p>These Terms are governed by and construed in accordance with the laws of [Your Jurisdiction]. Any disputes arising from these Terms or your use of the app will be resolved in the courts located in [Your Jurisdiction].</p>
+                <p>These Terms are governed by and construed in accordance with the laws of [South Africa]. Any disputes arising from these Terms or your use of the app will be resolved in the courts located in [North West].</p>
 
                 <h2>10. Contact Us</h2>
                 <p>If you have any questions about these Terms or our app, please contact us at:</p>
