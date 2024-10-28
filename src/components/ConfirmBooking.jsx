@@ -19,8 +19,14 @@ function ConfirmBooking() {
 
   const handleConfirm = () => {
     console.log("Booking confirmed!");
-   
     navigate('/paypal'); 
+  };
+
+  const handleSuccess = () => {
+    // Logic to handle a successful payment
+    console.log("Payment successful!");
+    // You can navigate to a confirmation page or show a success message
+    navigate('/success'); // Example path
   };
 
   if (!location.state) {
@@ -40,9 +46,8 @@ function ConfirmBooking() {
       <p><strong>Total Amount:</strong> R{bookingAmount}</p>
 
       <button className='enter-btn' onClick={handleConfirm}>Proceed to Payment</button>
-
-      {/* Include PayPalButton here if you want to render it directly */}
-      <PayPalButton amount={bookingAmount} onSuccess={handleSuccess} />
+      
+     
     </div>
   );
 }
