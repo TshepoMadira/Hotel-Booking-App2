@@ -11,7 +11,7 @@ import TermsandConditions from './components/TermsandConditions';
 import FAQS from './components/FAQS';
 import ForgotPassword from './components/ForgotPassword';
 import Gallery from './components/Gallery';
-import Userprofile from './components/Userprofile';
+
 
 
 
@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/checkavailabilityrooms" element={<CheckavailabilityRooms />} />
         <Route path="/confirmbooking" element={<ConfirmBooking />} />
         <Route path="/paypal" element={<PayPalButton />} />
-        <Route path="/userprofile" element={<Userprofile />} />
+        
       
         
 
