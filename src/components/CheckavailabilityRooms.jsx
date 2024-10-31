@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { db } from "./Firebase";
+import { collection, getDocs, query, where } from "firebase/firestore"; 
 import { useNavigate } from "react-router-dom";
-import Modal from "./Modal"; // Import the Modal component
+import Modal from "./Modal"; 
 import "./CheckavailabilityRooms.css";
 
 const CheckavailabilityRooms = () => {
@@ -10,13 +10,14 @@ const CheckavailabilityRooms = () => {
   const [checkInDate, setCheckInDate] = useState(today);
   const [checkOutDate, setCheckOutDate] = useState(today);
   const [rooms, setRooms] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState(null); // Store the selected room for modal
+  const [selectedRoom, setSelectedRoom] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRooms = async () => {
       const roomsCollection = collection(db, "accommodations");
-      const roomsSnapshot = await getDocs(roomsCollection);
+      const q = query(roomsCollection, where("isAvailable", "==", true)); 
+      const roomsSnapshot = await getDocs(q);
       const roomsList = roomsSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -88,7 +89,7 @@ const CheckavailabilityRooms = () => {
                 {room.main_image && <img src={room.main_image} alt={room.name} />}
                 <h3>{room.name}</h3>
                 <p>Price: R {room.price}</p>
-                <p>Available: {room.available ? "Yes" : "No"}</p>
+                <p>Available: {room.isAvailable ? "Yes" : "No"}</p>
                 <p>{room.description}</p>
 
                 <button
@@ -112,7 +113,6 @@ const CheckavailabilityRooms = () => {
         </div>
       </div>
 
-      {/* Modal for displaying room details */}
       <Modal isOpen={!!selectedRoom} onClose={closeModal} room={selectedRoom} />
     </div>
   );

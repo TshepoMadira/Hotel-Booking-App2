@@ -54,7 +54,7 @@ const Footer = () => {
                         <i className="fab fa-youtube"></i>
                     </a>
                 </div>
-                <p className="pp">© 2024 Paragon International Limited. All rights reserved.</p>
+                <p className="pp">© 2024 DREAMSCAPE International Limited. All rights reserved.</p>
             </div>
             {scrolling && (
                 <button className="scroll-to-top" onClick={scrollToTop}>

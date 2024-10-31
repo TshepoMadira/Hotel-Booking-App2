@@ -17,16 +17,9 @@ function ConfirmBooking() {
     bookingAmount 
   } = location.state || {};
 
-  const handleConfirm = () => {
-    console.log("Booking confirmed!");
-    navigate('/paypal'); 
-  };
-
   const handleSuccess = () => {
-    // Logic to handle a successful payment
     console.log("Payment successful!");
-    // You can navigate to a confirmation page or show a success message
-    navigate('/success'); // Example path
+    navigate('/success');
   };
 
   if (!location.state) {
@@ -45,9 +38,7 @@ function ConfirmBooking() {
       <p><strong>Number of Children:</strong> {numChildren}</p>
       <p><strong>Total Amount:</strong> R{bookingAmount}</p>
 
-      <button className='enter-btn' onClick={handleConfirm}>Proceed to Payment</button>
-      
-     
+      <PayPalButton amount={bookingAmount.toFixed(2)} onSuccess={handleSuccess} />
     </div>
   );
 }

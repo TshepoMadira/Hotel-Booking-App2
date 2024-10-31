@@ -1,5 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar = ({ isHomepage }) => {
@@ -17,7 +17,7 @@ const Navbar = ({ isHomepage }) => {
     if (isHomepage) {
       window.addEventListener('scroll', handleScroll);
     }
-    
+
     return () => {
       if (isHomepage) {
         window.removeEventListener('scroll', handleScroll);
@@ -28,11 +28,11 @@ const Navbar = ({ isHomepage }) => {
   return (
     <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
       <ul>
-        <li><a href="#">Signup</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#" className="book-now-btn">Book Now</a></li>
+        <li><Link to="/signup">Signup</Link></li> 
+        <li><Link to="/gallery">Gallery</Link></li>
+        <li><Link to="/aboutus">About Us</Link></li>
+        <li><Link to="/contactus">Contact Us</Link></li>
+        <li><Link to="/checkavailabilityrooms" className="book-now-btn">Reserve</Link></li>
       </ul>
     </nav>
   );
