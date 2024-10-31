@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBookingDetails } from '../Redux/bookingSlice';
 import "./BookingPlatform.css";
 
 const BookingPlatform = () => {
+  const dispatch = useDispatch();
+  const bookingDetails = useSelector((state) => state.booking);
   const location = useLocation();
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
@@ -10,14 +14,15 @@ const BookingPlatform = () => {
   const roomId = queryParams.get('roomId');
   const checkIn = queryParams.get('checkIn');
   const checkOut = queryParams.get('checkOut');
-  const [adults, setAdults] = useState(Number(queryParams.get('adults')) || 1);
-  const [children, setChildren] = useState(Number(queryParams.get('children')) || 0);
-  
+
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [rooms, setRooms] = useState(1);
+  const [rooms, setRooms] = useState(1); 
+  const [adults, setAdults] = useState(bookingDetails.adults);
+  const [children, setChildren] = useState(bookingDetails.children);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +31,7 @@ const BookingPlatform = () => {
       return;
     }
 
-    const bookingDetails = {
+    const bookingData = {
       fullName: `${name} ${surname}`,
       checkinDate: checkIn,
       checkoutDate: checkOut,
@@ -36,8 +41,10 @@ const BookingPlatform = () => {
       numChildren: children,
       bookingAmount: calculateBookingAmount(rooms, adults, children), 
     };
+    
+    dispatch(setBookingDetails({ roomId, checkIn, checkOut, adults, children }));
 
-    navigate('/confirmbooking', { state: bookingDetails });
+    navigate('/confirmbooking', { state: bookingData });
   };
 
   const calculateBookingAmount = (rooms, adults, children) => {
@@ -98,9 +105,7 @@ const BookingPlatform = () => {
 
         <button type="submit">Confirm Booking</button>
       </form>
-      
     </div>
-    
   );
 };
 

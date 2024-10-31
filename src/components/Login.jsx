@@ -32,7 +32,7 @@ const Login = () => {
   return (
     <div className="login-pagee">
       <div className="login-image-container">
-        <img src="public/6184159_3094352.jpg" alt="Login" />
+        
       </div>
       <div className="login">
         <h1>Login</h1>

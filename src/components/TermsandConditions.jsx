@@ -1,6 +1,6 @@
-
 import React from 'react';
-
+import { Link } from 'react-router-dom'; 
+import './TermsandConditions.css';
 
 const TermsandConditions = () => {
     return (
@@ -38,14 +38,18 @@ const TermsandConditions = () => {
                 <p>All content and materials available through the app, including text, graphics, logos, and software, are the property of Paragon Hotel or its licensors and are protected by copyright, trademark, and other intellectual property laws.</p>
 
                 <h2>8. Limitation of Liability</h2>
-                <p>To the fullest extent permitted by law, [Your Company] is not liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the app or any booking, even if we have been advised of the possibility of such damages.</p>
+                <p>To the fullest extent permitted by law, Paragon Hotel is not liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the app or any booking, even if we have been advised of the possibility of such damages.</p>
 
                 <h2>9. Governing Law</h2>
-                <p>These Terms are governed by and construed in accordance with the laws of [South Africa]. Any disputes arising from these Terms or your use of the app will be resolved in the courts located in [North West].</p>
+                <p>These Terms are governed by and construed in accordance with the laws of South Africa. Any disputes arising from these Terms or your use of the app will be resolved in the courts located in North West.</p>
 
                 <h2>10. Contact Us</h2>
                 <p>If you have any questions about these Terms or our app, please contact us at:</p>
                 
+                {/* Back to Home Link */}
+                <Link to="/" className="back-home-button">
+                    &larr; Back to Home
+                </Link>
             </main>
         </div>
     );

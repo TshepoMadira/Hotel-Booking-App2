@@ -12,35 +12,34 @@ const Contactus = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>Contact Us</h2>
+    <div className="container">
+      <h2 className="heading">Contact Us</h2>
       
-      <div className={styles.contactItem}>
-        <FontAwesomeIcon icon={faMapMarkerAlt} className={styles.icon} />
-        <div className={styles.contactInfo}>
-          <h3 className={styles.title}>Find Us Here</h3>
+      <div className="contactItem">
+        <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
+        <div className="contactInfo">
+          <h3 className="title">Find Us Here</h3>
           <p>5 Spoorweg Street, Brits, 0250 South Africa</p>
         </div>
       </div>
 
-      <div className={styles.contactItem}>
-        <FontAwesomeIcon icon={faPhone} className={styles.icon} />
-        <div className={styles.contactInfo}>
-          <h3 className={styles.title}>Call Us On</h3>
+      <div className="contactItem">
+        <FontAwesomeIcon icon={faPhone} className="icon" />
+        <div className="contactInfo">
+          <h3 className="title">Call Us On</h3>
           <p>079 123 4567</p>
         </div>
       </div>
 
-      <div className={styles.contactItem}>
-        <FontAwesomeIcon icon={faEnvelope} className={styles.icon} />
-        <div className={styles.contactInfo}>
-          <h3 className={styles.title}>Write To Us</h3>
+      <div className="contactItem">
+        <FontAwesomeIcon icon={faEnvelope} className="icon" />
+        <div className="contactInfo">
+          <h3 className="title">Write To Us</h3>
           <p>info@example.com</p>
         </div>
       </div>
 
-     
-      <button className={styles.backButton} onClick={handleBackHome}>
+      <button className="backButton" onClick={handleBackHome}>
         Back to Home
       </button>
     </div>

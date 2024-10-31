@@ -9,7 +9,7 @@ const PayPalButton = ({ amount, onSuccess }) => {
             script.src = `https://www.paypal.com/sdk/js?client-id=AT9h3ZvyeWdP5yEjwbJ8nNG3E7lL2KhfMu174zbk0EYXjY7YCpmo3jb9K6gwIPQzYA_dY--bsVa9_JfX`; 
             script.async = true;
             script.onload = () => {
-               
+              
                 if (window.paypal) {
                     window.paypal
                         .Buttons({

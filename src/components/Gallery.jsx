@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './Gallery.css'; 
 
 const images = {
@@ -23,12 +24,11 @@ const images = {
         { src: 'src/assets/images/Luxury bathroom ideas – 10 modern ways to turn your space into a spa-like retreat.jpeg', alt: 'Bathroom'},
         { src: 'src/assets/images/6 ideas para colocar e integrar la televisión en el salón · 6 ideas to decorate with your TV - Vintage & Chic_ Pequeñas historias de decoración.jpeg', alt: 'Tv room'},
     ],
-    amneties:[
+    amenities: [
         {src: 'src/assets/images/WELLNESS&POOL MIX Ceramic Pool liner By Appiani.jpeg', alt: 'Pool Area'},
         {src: 'src/assets/images/Launch — Vida Design.jpeg', alt: 'Gym Area'},
         {src: 'src/assets/images/Love the idea of having showers in the room to….jpeg', alt: 'Spa area'},
         {src: 'src/assets/images/Spa - Sauna - Hammam - Relaxing.jpeg', alt: 'Body massage'}
-
     ],
     queen: [
         { src: 'src/assets/images/Bedroom.jpeg', alt: 'Queen Suite ' },
@@ -38,28 +38,36 @@ const images = {
         { src: 'src/assets/images/JW Marriott Hotel Chandigarh.jpeg', alt: 'Presidential Suite ' },
         { src: 'src/assets/images/CORDIS, SHANGHAI, HONGQIAO - Hotel Reviews, Photos, Rate Comparison - Tripadvisor.jpeg', alt: 'Presidential Suite ' },
     ],
-    
 };
 
 const Gallery = () => {
     const [category, setCategory] = useState('all');
+    const navigate = useNavigate(); 
 
     const showAll = () => setCategory('all');
     const showCategory = (cat) => setCategory(cat);
+    
+    const handleBackHome = () => {
+        navigate('/');
+    };
 
     return (
         <div className="gallery-container">
             <header>
-                {/* <h1>Dreamscape Gallery</h1> */}
                 <img src="src/assets/images/Screenshot__2_-removebg-preview.png" alt="Logo" className="logo" />
             </header>
 
+            
+            <button className="back-home" onClick={handleBackHome}>
+                ← Back Home
+            </button>
+
             <nav className="gallery-nav">
                 <button className='showall' onClick={showAll}>Show All</button>
-                <button  className='king'onClick={() => showCategory('king')}>King Suite</button>
-                <button  className='queen'onClick={() => showCategory('queen')}>Queen Suite</button>
-                <button  className='presidential'onClick={() => showCategory('presidential')}>Presidential Suite</button>
-                <button  className='amneties'onClick={() => showCategory('amneties')}>Amneties</button>
+                <button className='king' onClick={() => showCategory('king')}>King Suite</button>
+                <button className='queen' onClick={() => showCategory('queen')}>Queen Suite</button>
+                <button className='presidential' onClick={() => showCategory('presidential')}>Presidential Suite</button>
+                <button className='amenities' onClick={() => showCategory('amenities')}>Amenities</button>
             </nav>
 
             <div className="gallery-images">
