@@ -23,7 +23,7 @@ const Login = () => {
     try {
       
       console.log('User logged in:', form);
-      r
+      
       
       navigate('/checkavailabilityrooms');
     } catch (error) {
@@ -61,7 +61,7 @@ const Login = () => {
               required
             />
           </div>
-          <button className='login-btn' type="submit">Login</button>
+          <button className='login-btnn' type="submit">Login</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
         <div style={{ marginTop: '10px' }}>

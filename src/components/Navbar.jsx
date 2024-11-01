@@ -34,7 +34,7 @@ const Navbar = ({ isHomepage }) => {
   return (
     <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
       <ul>
-        <li><Link to="/signup">Signup</Link></li> 
+        <li><Link to="/login">Signup</Link></li> 
         <li><Link to="/gallery">Gallery</Link></li>
         <li><Link to="/aboutus">About Us</Link></li>
         <li><Link to="/contactus">Contact Us</Link></li>

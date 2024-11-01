@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
+import './About.css'
 
 
 const Aboutus = () => {
@@ -36,7 +37,7 @@ const Aboutus = () => {
         style={{ 
           display: 'inline-block', 
           padding: '10px 15px', 
-          backgroundColor: '#007bff', 
+          backgroundColor: '#726555', 
           color: 'white', 
           textDecoration: 'none', 
           borderRadius: '5px', 
