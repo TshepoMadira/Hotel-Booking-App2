@@ -8,7 +8,6 @@ const Login = () => {
     password: ''
   });
   const [error, setError] = useState('');
-
   const navigate = useNavigate(); 
 
   const handleChange = (e) => {
@@ -22,8 +21,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Simulate login process
       console.log('User logged in:', form);
-
+      // Here you would normally authenticate the user
+      // If login is successful, navigate to the next page
+      navigate('/checkavailabilityrooms');
     } catch (error) {
       setError(error.message);
     }
@@ -32,7 +34,7 @@ const Login = () => {
   return (
     <div className="login-pagee">
       <div className="login-image-container">
-        
+        {/* Add your image or other content here */}
       </div>
       <div className="login">
         <h1>Login</h1>

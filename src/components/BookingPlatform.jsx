@@ -14,15 +14,19 @@ const BookingPlatform = () => {
   const roomId = queryParams.get('roomId');
   const checkIn = queryParams.get('checkIn');
   const checkOut = queryParams.get('checkOut');
-
+  const roomPrice = parseFloat(queryParams.get('roomPrice')) || 0;
 
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [rooms, setRooms] = useState(1); 
-  const [adults, setAdults] = useState(bookingDetails.adults);
-  const [children, setChildren] = useState(bookingDetails.children);
+  const [adults, setAdults] = useState(bookingDetails.adults || 1); 
+  const [children, setChildren] = useState(bookingDetails.children || 0);
+
+  const calculateBookingAmount = (rooms, roomPrice) => {
+    return roomPrice * rooms; 
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,26 +35,22 @@ const BookingPlatform = () => {
       return;
     }
 
+    const bookingAmount = calculateBookingAmount(rooms, roomPrice);
+    console.log("Rooms:", rooms, "Booking Amount:", bookingAmount);
+
     const bookingData = {
       fullName: `${name} ${surname}`,
       checkinDate: checkIn,
       checkoutDate: checkOut,
-      roomType: roomId, 
+      roomType: roomId,
       numRooms: rooms,
       numAdults: adults,
       numChildren: children,
-      bookingAmount: calculateBookingAmount(rooms, adults, children), 
+      bookingAmount: bookingAmount,
     };
     
     dispatch(setBookingDetails({ roomId, checkIn, checkOut, adults, children }));
-
     navigate('/confirmbooking', { state: bookingData });
-  };
-
-  const calculateBookingAmount = (rooms, adults, children) => {
-    const basePrice = 100; 
-    const adultSurcharge = 20; 
-    return basePrice * rooms + (adultSurcharge * adults);
   };
 
   const validateForm = () => {

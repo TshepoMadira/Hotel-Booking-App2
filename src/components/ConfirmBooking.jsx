@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PayPalButton from './PayPalButton';
+import { db } from './Firebase'; 
+import { collection, addDoc } from 'firebase/firestore';
 
 function ConfirmBooking() {
   const location = useLocation();
@@ -17,9 +19,31 @@ function ConfirmBooking() {
     bookingAmount 
   } = location.state || {};
 
-  const handleSuccess = () => {
-    console.log("Payment successful!");
-    navigate('/success');
+  const handleSuccess = async (details) => {
+    console.log("Payment successful!", details);
+    
+    const bookingData = {
+      fullName,
+      checkinDate,
+      checkoutDate,
+      roomType,
+      numRooms,
+      numAdults,
+      numChildren,
+      bookingAmount,
+      paymentDetails: details, 
+    };
+
+    try {
+      const bookingsCollection = collection(db, 'bookings'); 
+      await addDoc(bookingsCollection, bookingData);
+      console.log('Booking successfully saved to Firebase:', bookingData);
+
+    
+      navigate('/userprofile'); 
+    } catch (error) {
+      console.error('Error saving booking to Firebase:', error);
+    }
   };
 
   if (!location.state) {

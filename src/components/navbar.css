@@ -10,6 +10,7 @@
   padding: 10px 20px; 
   z-index: 1000;
   box-shadow: none; 
+  height: 50px;
 }
 
 .navbar.scrolled {
@@ -27,7 +28,7 @@
   margin: 0;
   display: flex;
   justify-content: flex-end; 
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .navbar li {
@@ -46,7 +47,7 @@
   color: #ffcc00; 
 }
 
-.book-now-btn {
+/* .logout-btn {
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -58,6 +59,23 @@
 .book-now-btn:hover {
   background-color: #291905; 
   color: white; 
+  transform: scale(1.05); 
+} */
+
+.logout-btn {
+  background-color:  #726555;
+
+  color: white;
+  border: none; 
+  border-radius: 5px; 
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s; 
+}
+
+.logout-btn:hover {
+  background-color:  #2e2922; 
   transform: scale(1.05); 
 }
 

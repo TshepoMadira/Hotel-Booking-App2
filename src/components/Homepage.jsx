@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./homepage.css";
 import Footer from "./footer";
 import BookingForm from "./Bookingform";
 
 const Homepage = () => {
   const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
@@ -28,8 +29,11 @@ const Homepage = () => {
       name: "Michael Smith",
       text: "An unforgettable experience! The staff were incredibly welcoming and attentive.",
     },
-    
   ];
+
+  const handleBookNow = () => {
+    navigate("/checkavailabilityrooms"); 
+  };
 
   return (
     <div className="home-page">
@@ -42,7 +46,7 @@ const Homepage = () => {
         <div className="overlay">
           <h1>DREAMSCAPE HOTEL</h1>
           <p className="slogan">Luxury and Comfort</p>
-          <button className="btn btn-primary">Book Now</button>
+          <button onClick={handleBookNow} className="book-now-btn">Book</button> 
         </div>
       </header>
 

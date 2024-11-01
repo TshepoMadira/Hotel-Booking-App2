@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { db } from "./Firebase";
 import { collection, getDocs, query, where } from "firebase/firestore"; 
 import { useNavigate } from "react-router-dom";
-import Modal from "./Modal"; 
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleFavorite } from '../Redux/Favoriteslice.js';
 import "./CheckavailabilityRooms.css";
 
 const CheckavailabilityRooms = () => {
@@ -10,7 +11,9 @@ const CheckavailabilityRooms = () => {
   const [checkInDate, setCheckInDate] = useState(today);
   const [checkOutDate, setCheckOutDate] = useState(today);
   const [rooms, setRooms] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState(null); 
+  const [selectedRoomPrice, setSelectedRoomPrice] = useState(null); 
+  const favoriteRoomIds = useSelector((state) => state.Favorite.favoriteRoomIds); 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,17 +30,14 @@ const CheckavailabilityRooms = () => {
     fetchRooms();
   }, []);
 
-  const handleBooking = (roomId) => {
-    const bookingPath = `/bookingplatform?roomId=${roomId}&checkIn=${checkInDate}&checkOut=${checkOutDate}`;
+  const handleBooking = (roomId, roomPrice) => {
+    setSelectedRoomPrice(roomPrice); 
+    const bookingPath = `/bookingplatform?roomId=${roomId}&checkIn=${checkInDate}&checkOut=${checkOutDate}&roomPrice=${roomPrice}`;
     navigate(bookingPath);
   };
 
-  const openModal = (room) => {
-    setSelectedRoom(room);
-  };
-
-  const closeModal = () => {
-    setSelectedRoom(null);
+  const handleToggleFavorite = (roomId) => {
+    dispatch(toggleFavorite(roomId)); 
   };
 
   return (
@@ -72,9 +72,7 @@ const CheckavailabilityRooms = () => {
         <button
           className="check-availability-button"
           onClick={() =>
-            alert(
-              `Checking availability for ${checkInDate} to ${checkOutDate}`
-            )
+            alert(`Checking availability for ${checkInDate} to ${checkOutDate}`)
           }
         >
           Check Availability
@@ -93,17 +91,17 @@ const CheckavailabilityRooms = () => {
                 <p>{room.description}</p>
 
                 <button
-                  className="show-more-button"
-                  onClick={() => openModal(room)} 
+                  className="book-button"
+                  onClick={() => handleBooking(room.id, room.price)} 
                 >
-                  Show Details
+                  Book Now
                 </button>
 
                 <button
-                  className="book-button"
-                  onClick={() => handleBooking(room.id)}
+                  className={`favorite-button ${favoriteRoomIds.includes(room.id) ? 'favorited' : ''}`}
+                  onClick={() => handleToggleFavorite(room.id)}
                 >
-                  Book Now
+                  {favoriteRoomIds.includes(room.id) ? "Remove from Favorites" : "Add to Favorites"}
                 </button>
               </div>
             ))
@@ -112,8 +110,6 @@ const CheckavailabilityRooms = () => {
           )}
         </div>
       </div>
-
-      <Modal isOpen={!!selectedRoom} onClose={closeModal} room={selectedRoom} />
     </div>
   );
 };
