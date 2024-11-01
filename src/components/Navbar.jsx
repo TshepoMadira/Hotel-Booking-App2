@@ -27,8 +27,11 @@ const Navbar = ({ isHomepage }) => {
   }, [isHomepage]);
 
   const handleLogout = () => {
-    
     navigate('/'); 
+  };
+
+  const handleAdminClick = () => {
+    navigate('/adminreservations');
   };
 
   return (
@@ -40,6 +43,9 @@ const Navbar = ({ isHomepage }) => {
         <li><Link to="/contactus">Contact Us</Link></li>
         <li>
           <button onClick={handleLogout} className="logout-btn">Logout</button> 
+        </li>
+        <li>
+          <button onClick={handleAdminClick} className="admin-btn">Admin</button> 
         </li>
       </ul>
     </nav>
