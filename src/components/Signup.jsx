@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
-
 const Signup = () => {
   const [form, setForm] = useState({
     firstName: '',
@@ -24,7 +23,6 @@ const Signup = () => {
       [name]: value
     });
 
-    
     if (name === 'password') {
       checkPasswordStrength(value);
     }
@@ -142,11 +140,11 @@ const Signup = () => {
           />
           {passwordStrength && <p style={{ color: passwordStrength === 'Strong password' ? 'green' : 'red' }}>{passwordStrength}</p>}
         </div>
-        <button type="submit-btnn">Enter</button>
+        <button type="submit">Enter</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
       <div style={{ marginTop: '10px' }}>
-        <a className='forgot-password-link'href="/forgotpassword">Forgot Password?</a>
+        <a className='forgot-password-link' href="/forgotpassword">Forgot Password?</a>
       </div>
     </div>
   );

@@ -14,6 +14,9 @@ import BookingPlatform from './components/BookingPlatform';
 import CheckavailabilityRooms from './components/CheckavailabilityRooms';
 import ConfirmBooking from './components/ConfirmBooking';
 import PayPalButton from './components/PayPalButton';
+import AdminReservations from './components/Admin/AdminReservations';
+import UserProfile from './components/Userprofile';
+
 
 
 
@@ -37,6 +40,8 @@ const App = () => {
         <Route path="/checkavailabilityrooms" element={<CheckavailabilityRooms />} />
         <Route path="/confirmbooking" element={<ConfirmBooking />} />
        <Route path="/paypal" element={<PayPalButton />} />
+       <Route path="/adminreservations" element={<AdminReservations />} />
+       <Route path="/userprofile" element={<UserProfile />} />
       </Routes>
       
     </>
