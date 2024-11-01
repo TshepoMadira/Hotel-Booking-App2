@@ -3,6 +3,7 @@ import { auth, db } from '../components/Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import './Signup.css'
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -81,7 +82,7 @@ const Signup = () => {
   };
 
   return (
-    <div className='Signup-Container'>
+    <div className='Signup-Containerr'>
       <h1 className='signup'>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -140,7 +141,7 @@ const Signup = () => {
           />
           {passwordStrength && <p style={{ color: passwordStrength === 'Strong password' ? 'green' : 'red' }}>{passwordStrength}</p>}
         </div>
-        <button type="submit">Enter</button>
+        <button className='enter' type="submit">Enter</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
       <div style={{ marginTop: '10px' }}>

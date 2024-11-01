@@ -84,3 +84,34 @@ button {
   object-fit: cover; 
   
 } 
+
+
+
+
+
+.search-container {
+  margin: 20px 0; 
+  display: flex;
+  justify-content: center; 
+}
+
+.search-container input {
+  padding: 10px;
+  border: 1px solid #f5f2e9;
+  border-radius: 4px;
+  width: 300px; 
+  max-width: 100%; 
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating span {
+  margin-left: 5px;
+}
+
+
+
+
