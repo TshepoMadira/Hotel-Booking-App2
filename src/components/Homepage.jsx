@@ -104,7 +104,7 @@ const Homepage = () => {
               <h3>{room.title}</h3>
               <img src={room.image} alt={room.title} className="room-image" />
               <div className="room-description">
-                {/* <p className="description">{room.description}</p> */}
+              
               </div>
             </div>
           ))}
