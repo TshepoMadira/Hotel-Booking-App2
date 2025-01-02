@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./Firebase";
-import { collection, getDocs, query, where } from "firebase/firestore"; 
+import { collection, getDocs, query, where, doc, updateDoc } from "firebase/firestore"; // Import updateDoc
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavorite } from '../Redux/Favoriteslice.js';
@@ -19,7 +19,7 @@ const CheckavailabilityRooms = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       const roomsCollection = collection(db, "accommodations");
-      const q = query(roomsCollection, where("isAvailable", "==", true)); 
+      const q = query(roomsCollection, where("available", "==", true)); 
       const roomsSnapshot = await getDocs(q);
       const roomsList = roomsSnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -30,10 +30,28 @@ const CheckavailabilityRooms = () => {
     fetchRooms();
   }, []);
 
-  const handleBooking = (roomId, roomPrice) => {
-    setSelectedRoomPrice(roomPrice); 
-    const bookingPath = `/bookingplatform?roomId=${roomId}&checkIn=${checkInDate}&checkOut=${checkOutDate}&roomPrice=${roomPrice}`;
-    navigate(bookingPath);
+  const handleBooking = async (roomId, roomPrice) => {
+    try {
+   
+      const roomRef = doc(db, "accommodations", roomId);
+      await updateDoc(roomRef, {
+        available: false,
+      });
+
+    
+      setSelectedRoomPrice(roomPrice); 
+      const bookingPath = `/bookingplatform?roomId=${roomId}&checkIn=${checkInDate}&checkOut=${checkOutDate}&roomPrice=${roomPrice}`;
+      navigate(bookingPath);
+
+     
+      setRooms((prevRooms) =>
+        prevRooms.map((room) =>
+          room.id === roomId ? { ...room, available: false } : room
+        )
+      );
+    } catch (error) {
+      console.error("Error updating room availability:", error);
+    }
   };
 
   const handleToggleFavorite = (roomId) => {
@@ -87,7 +105,7 @@ const CheckavailabilityRooms = () => {
                 {room.main_image && <img src={room.main_image} alt={room.name} />}
                 <h3>{room.name}</h3>
                 <p>Price: R {room.price}</p>
-                <p>Available: {room.isAvailable ? "Yes" : "No"}</p>
+                <p>Available: {room.available ? "Yes" : "No"}</p> 
                 <p>{room.description}</p>
 
                 <button
