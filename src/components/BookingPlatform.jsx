@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBookingDetails } from '../Redux/bookingSlice';
+import { db } from './Firebase';
+import { doc, getDoc } from 'firebase/firestore';
 import "./BookingPlatform.css";
 
 const BookingPlatform = () => {
@@ -23,6 +25,20 @@ const BookingPlatform = () => {
   const [rooms, setRooms] = useState(1); 
   const [adults, setAdults] = useState(bookingDetails.adults || 1); 
   const [children, setChildren] = useState(bookingDetails.children || 0);
+  const [roomDetails, setRoomDetails] = useState(null); 
+ 
+  useEffect(() => {
+    const fetchRoomDetails = async () => {
+      if (roomId) {
+        const roomRef = doc(db, "accommodations", roomId);
+        const roomSnap = await getDoc(roomRef);
+        if (roomSnap.exists()) {
+          setRoomDetails({ id: roomSnap.id, ...roomSnap.data() });
+        }
+      }
+    };
+    fetchRoomDetails();
+  }, [roomId]);
 
   const calculateBookingAmount = (rooms, roomPrice) => {
     return roomPrice * rooms; 
@@ -60,6 +76,20 @@ const BookingPlatform = () => {
   return (
     <div className="booking-container">
       <h1>Booking Form</h1>
+
+     
+      {roomDetails && (
+        <div className="room-detailss">
+          <h2>Room Details</h2>
+          <div className="room-image-containers">
+            <img src={roomDetails.main_image} alt={roomDetails.name} className="room-images" />
+          </div>
+          <h3>{roomDetails.name}</h3>
+          <p className="room-descriptions">{roomDetails.description}</p>
+          <p className="room-prices">Price: R{roomDetails.price}</p>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit}>
         <p>Room ID: {roomId}</p>
         <p>Check-in Date: {checkIn}</p>
@@ -103,7 +133,7 @@ const BookingPlatform = () => {
           <button type="button" onClick={() => setChildren(Math.max(0, children - 1))}>-</button>
         </label>
 
-        <button type="submit">Confirm Booking</button>
+        <button className="confirm-booking" type="submit">Confirm Booking</button>
       </form>
     </div>
   );

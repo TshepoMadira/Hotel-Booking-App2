@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./Firebase";
-import { collection, getDocs, query, where, doc, updateDoc } from "firebase/firestore"; // Import updateDoc
+import { collection, getDocs, query, where, doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleFavorite } from '../Redux/Favoriteslice.js';
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../Redux/Favoriteslice.js";
 import "./CheckavailabilityRooms.css";
 
 const CheckavailabilityRooms = () => {
@@ -11,15 +11,15 @@ const CheckavailabilityRooms = () => {
   const [checkInDate, setCheckInDate] = useState(today);
   const [checkOutDate, setCheckOutDate] = useState(today);
   const [rooms, setRooms] = useState([]);
-  const [selectedRoomPrice, setSelectedRoomPrice] = useState(null); 
-  const favoriteRoomIds = useSelector((state) => state.Favorite.favoriteRoomIds); 
+  const [selectedRoomPrice, setSelectedRoomPrice] = useState(null);
+  const favoriteRoomIds = useSelector((state) => state.Favorite.favoriteRoomIds);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRooms = async () => {
       const roomsCollection = collection(db, "accommodations");
-      const q = query(roomsCollection, where("available", "==", true)); 
+      const q = query(roomsCollection, where("available", "==", true));
       const roomsSnapshot = await getDocs(q);
       const roomsList = roomsSnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -32,18 +32,15 @@ const CheckavailabilityRooms = () => {
 
   const handleBooking = async (roomId, roomPrice) => {
     try {
-   
       const roomRef = doc(db, "accommodations", roomId);
       await updateDoc(roomRef, {
         available: false,
       });
 
-    
-      setSelectedRoomPrice(roomPrice); 
+      setSelectedRoomPrice(roomPrice);
       const bookingPath = `/bookingplatform?roomId=${roomId}&checkIn=${checkInDate}&checkOut=${checkOutDate}&roomPrice=${roomPrice}`;
       navigate(bookingPath);
 
-     
       setRooms((prevRooms) =>
         prevRooms.map((room) =>
           room.id === roomId ? { ...room, available: false } : room
@@ -55,7 +52,7 @@ const CheckavailabilityRooms = () => {
   };
 
   const handleToggleFavorite = (roomId) => {
-    dispatch(toggleFavorite(roomId)); 
+    dispatch(toggleFavorite(roomId));
   };
 
   return (
@@ -96,31 +93,33 @@ const CheckavailabilityRooms = () => {
           Check Availability
         </button>
       </div>
+
       <div className="rooms-list">
         <h2>Available Rooms</h2>
         <div className="rooms-grid">
           {rooms.length > 0 ? (
             rooms.map((room) => (
               <div key={room.id} className="room-card">
-                {room.main_image && <img src={room.main_image} alt={room.name} />}
-                <h3>{room.name}</h3>
-                <p>Price: R {room.price}</p>
-                <p>Available: {room.available ? "Yes" : "No"}</p> 
-                <p>{room.description}</p>
-
-                <button
-                  className="book-button"
-                  onClick={() => handleBooking(room.id, room.price)} 
-                >
-                  Book Now
-                </button>
-
-                <button
-                  className={`favorite-button ${favoriteRoomIds.includes(room.id) ? 'favorited' : ''}`}
-                  onClick={() => handleToggleFavorite(room.id)}
-                >
-                  {favoriteRoomIds.includes(room.id) ? "Remove from Favorites" : "Add to Favorites"}
-                </button>
+                <div className="room-image-container">
+                  <img src={room.main_image} alt={room.name} className="room-image" />
+                  <button
+                    className={`favorite-icon ${favoriteRoomIds.includes(room.id) ? "favorited" : ""}`}
+                    onClick={() => handleToggleFavorite(room.id)}
+                  >
+                    {favoriteRoomIds.includes(room.id) ? "❤️" : "🤍"}
+                  </button>
+                </div>
+                <div className="room-details">
+                  <h3>{room.name}</h3>
+                  <p className="room-description">{room.description}</p>
+                  <p className="room-price">Price: R{room.price}</p> 
+                  <button
+                    className="book-button"
+                    onClick={() => handleBooking(room.id, room.price)}
+                  >
+                    Book Now
+                  </button>
+                </div>
               </div>
             ))
           ) : (
