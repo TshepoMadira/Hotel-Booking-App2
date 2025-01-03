@@ -16,6 +16,7 @@ import ConfirmBooking from './components/ConfirmBooking';
 import PayPalButton from './components/PayPalButton';
 import AdminReservations from './components/Admin/AdminReservations';
 import UserProfile from './components/Userprofile';
+import RoomsManager from './components/RoomsManager';
 
 
 
