@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; 
-import { getFirestore, doc, getDoc } from 'firebase/firestore'; 
-import './Login.css'; 
+import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../components/AuthContext';
+import './Login.css';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -10,7 +11,8 @@ const Login = () => {
     password: ''
   });
   const [error, setError] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const { login } = useAuth(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,19 +25,23 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const auth = getAuth();
-    const db = getFirestore(); // Initialize Firestore
+    const db = getFirestore();
 
     try {
+     
       const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
       const user = userCredential.user;
 
-      // Get the user's document from Firestore
+      
       const userDoc = await getDoc(doc(db, 'users', user.uid));
 
       if (userDoc.exists()) {
         const userData = userDoc.data();
 
-        // Check if the user is an admin
+        
+        login(); 
+
+        
         if (userData.role === 'admin') {
           navigate('/adminreservations');
         } else {
@@ -52,7 +58,7 @@ const Login = () => {
   return (
     <div className="login-pagee">
       <div className="login-image-container">
-        {/* Optional: Add a login image here */}
+   
       </div>
       <div className="login">
         <h1>Login</h1>
