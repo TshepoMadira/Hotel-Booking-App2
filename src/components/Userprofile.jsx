@@ -62,35 +62,38 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-container">
-      <h1>User Profile</h1>
-      <form onSubmit={handleUpdateProfile}>
-        <label>
+      <h1 className="user-profile-title">User Profile</h1>
+      <form className="user-profile-form" onSubmit={handleUpdateProfile}>
+        <label className="user-profile-label">
           Name:
           <input 
             type="text" 
             value={name} 
             onChange={(e) => setName(e.target.value)} 
+            className="user-profile-input"
             required 
           />
         </label>
-        <label>
+        <label className="user-profile-label">
           Email:
           <input 
             type="email" 
             value={user.email} 
+            className="user-profile-input"
             readOnly 
           />
         </label>
-        <label>
+        <label className="user-profile-label">
           Phone Number:
           <input 
             type="tel" 
             value={phone} 
             onChange={(e) => setPhone(e.target.value)} 
+            className="user-profile-input"
             required 
           />
         </label>
-        <button type="submit">Update Profile</button>
+        <button className="user-profile-button" type="submit">Update Profile</button>
       </form>
 
       <div className="booking-history">

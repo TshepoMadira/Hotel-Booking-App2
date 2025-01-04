@@ -1,25 +1,24 @@
-
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: black;
-  color: white; 
+  color: white;
   transition: background-color 0.3s ease, color 0.3s ease;
-  padding: 10px 20px; 
+  padding: 10px 20px;
   z-index: 1000;
-  box-shadow: none; 
+  box-shadow: none;
   height: 50px;
 }
 
 .navbar.scrolled {
-  background-color: black; 
+  background-color: black;
   color: white;
   height: 50px;
   width: 98%;
   margin-top: 0.1px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .navbar ul {
@@ -27,81 +26,81 @@
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   margin-top: 20px;
 }
 
 .navbar li {
-  margin-left: 20px; 
+  margin-left: 10px; 
+  padding-right: 10px;
+  position: relative;
+}
+
+.navbar li::after {
+  content: '';
+  position: absolute;
+  top: 50%; 
+  right: 0;
+  transform: translateY(-50%); 
+  height: 60%; 
+  width: 1px; 
+  background-color: #f5f2e9; 
+}
+
+.navbar li:last-child::after {
+  display: none; 
 }
 
 .navbar a {
   text-decoration: none;
-  color: inherit; 
+  color: inherit;
   transition: color 0.3s ease;
   font-weight: 500;
-  padding: 8px 12px; 
+  padding: 8px 12px;
 }
 
 .navbar a:hover {
-  color: #ffcc00; 
+  color: #ffcc00;
 }
-
-/* .logout-btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #726555;
-  transition: background-color 0.3s ease, transform 0.2s ease; 
-}
-
-.book-now-btn:hover {
-  background-color: #291905; 
-  color: white; 
-  transform: scale(1.05); 
-} */
 
 .logout-btn {
-  background-color:  #726555;
-
+  background-color: #726555;
   color: white;
-  border: none; 
-  border-radius: 5px; 
+  border: none;
+  border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s; 
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .logout-btn:hover {
-  background-color:  #2e2922; 
-  transform: scale(1.05); 
+  background-color: #2e2922;
+  transform: scale(1.05);
 }
-
-
 
 @media (max-width: 768px) {
   .navbar ul {
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 60px; 
+    top: 60px;
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    display: none; 
+    display: none;
   }
 
   .navbar.scrolled ul {
-    display: flex; 
+    display: flex;
   }
 
   .navbar li {
-    margin: 10px 0; 
+    margin: 10px 0;
+    border-right: none; 
   }
 
-  .book-now-btn {
-    width: 100%; 
+  .navbar li::after {
+    display: none; 
   }
 }

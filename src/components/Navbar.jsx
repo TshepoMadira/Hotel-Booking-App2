@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar = ({ isHomepage }) => {
   const [scrolling, setScrolling] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -27,7 +27,9 @@ const Navbar = ({ isHomepage }) => {
   }, [isHomepage]);
 
   const handleLogout = () => {
-    navigate('/'); 
+
+    navigate('/');
+
   };
 
   const handleAdminClick = () => {
@@ -37,12 +39,14 @@ const Navbar = ({ isHomepage }) => {
   return (
     <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
       <ul>
-        <li><Link to="/login">Signup</Link></li> 
+
+        <li><Link to="/signup">Signup</Link></li>
+
         <li><Link to="/gallery">Gallery</Link></li>
         <li><Link to="/aboutus">About Us</Link></li>
         <li><Link to="/contactus">Contact Us</Link></li>
         <li>
-          <button onClick={handleLogout} className="logout-btn">Logout</button> 
+          <button onClick={handleLogout} className="logout-btn">Logout</button>
         </li>
         <li>
           <button onClick={handleAdminClick} className="admin-btn">Admin</button> 
