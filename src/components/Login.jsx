@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { useDispatch } from 'react-redux'; 
+import { setUser } from '../Redux/userSlice';
 import { useAuth } from '../components/AuthContext';
 import './Login.css';
 
@@ -12,7 +14,8 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth(); 
+  const { login } = useAuth();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,16 +35,24 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
       const user = userCredential.user;
 
-      
+    
       const userDoc = await getDoc(doc(db, 'users', user.uid));
 
       if (userDoc.exists()) {
         const userData = userDoc.data();
 
-        
-        login(); 
+       
+        dispatch(setUser({
+          id: user.uid,
+          email: user.email,
+          name: userData.name,
+          phone: userData.phone,
+        }));
 
         
+        login();
+
+     
         if (userData.role === 'admin') {
           navigate('/adminreservations');
         } else {
@@ -58,7 +69,7 @@ const Login = () => {
   return (
     <div className="login-pagee">
       <div className="login-image-container">
-   
+        
       </div>
       <div className="login">
         <h1>Login</h1>

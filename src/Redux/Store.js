@@ -6,9 +6,8 @@ import userReducer from './userSlice';
 const store = configureStore({
   reducer: {
     booking: bookingReducer,
-    Favorite: FavoriteReducer,
+    favorites: FavoriteReducer,
     user: userReducer,
-    
   },
 });
 
