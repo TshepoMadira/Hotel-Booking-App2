@@ -10,8 +10,8 @@ const Signup = () => {
     firstName: '',
     lastName: '',
     email: '',
-    confirmEmail: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
   const [error, setError] = useState('');
   const [passwordStrength, setPasswordStrength] = useState('');
@@ -54,8 +54,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (form.email !== form.confirmEmail) {
-      setError('Email and confirm email do not match.');
+    if (form.password !== form.confirmPassword) {
+      setError('Password and confirm password do not match.');
       return;
     }
 
@@ -119,17 +119,6 @@ const Signup = () => {
           />
         </div>
         <div>
-          <label className="confirmEmaill">Confirm Email:</label>
-          <input
-            type="email"
-            id="confirmEmail"
-            name="confirmEmail"
-            value={form.confirmEmail}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
           <label className="passssword">Password:</label>
           <input
             type="password"
@@ -140,6 +129,17 @@ const Signup = () => {
             required
           />
           {passwordStrength && <p style={{ color: passwordStrength === 'Strong password' ? 'green' : 'red' }}>{passwordStrength}</p>}
+        </div>
+        <div>
+          <label className="confirmPasswordd">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={form.confirmPassword}
+            onChange={handleChange}
+            required
+          />
         </div>
         <button className='enter' type="submit">Enter</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}

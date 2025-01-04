@@ -64,9 +64,7 @@ const CheckavailabilityRooms = () => {
     dispatch(toggleFavorite(roomId));
   };
 
-  const filteredRooms = rooms.filter(room => 
-    room.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+ 
 
   return (
     <div className="container">
