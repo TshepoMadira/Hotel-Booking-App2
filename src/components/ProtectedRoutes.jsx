@@ -5,4 +5,6 @@ const ProtectedRoutes = ({ component: Component, isAuthenticated, ...rest }) => 
   return isAuthenticated ? <Component {...rest} /> : <Navigate to="/login" />;
 };
 
+
 export default ProtectedRoutes;
+

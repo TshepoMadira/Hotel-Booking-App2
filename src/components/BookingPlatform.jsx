@@ -75,6 +75,10 @@ const BookingPlatform = () => {
 
   return (
     <div className="booking-container">
+      <button className="back-buttonnn" onClick={() => navigate('/checkavailabilityrooms')}>
+        &#8592; 
+      </button>
+
       <h1>Booking Form</h1>
 
      

@@ -2,12 +2,12 @@
     display: inline-block;
     margin-top: 20px;
     padding: 10px 15px;
-    background-color: #007bff; /* Example color */
+    background-color: #726555; 
     color: white;
-    text-decoration: none; /* Remove underline for link */
+    text-decoration: none; 
     border-radius: 5px;
 }
 
 .back-home-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #252423; 
 }

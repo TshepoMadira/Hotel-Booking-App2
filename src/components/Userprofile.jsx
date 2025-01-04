@@ -7,17 +7,13 @@ import './UserProfile.css';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => {
-    console.log('Current user state:', state.user); 
-    return state.user;
-  });
+  const user = useSelector((state) => state.user);
 
   const [name, setName] = useState(user.name || '');
   const [phone, setPhone] = useState(user.phone || '');
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      console.log('User ID:', user.id); 
       if (!user.id) {
         console.error('User ID is null or undefined');
         return;
@@ -60,7 +56,7 @@ const UserProfile = () => {
       alert('Profile updated successfully!');
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert('Error updating profile. Please try again.');
+     
     }
   };
 
@@ -99,6 +95,17 @@ const UserProfile = () => {
         </label>
         <button className="user-profile-button" type="submit">Update Profile</button>
       </form>
+
+      <div className="booking-history">
+        <h2>Booking History</h2>
+      
+        <p>You have no booking history.</p>
+      </div>
+
+      <div className="favorites">
+        <h2>Favorite Accommodations</h2>
+        <p>You have no favorite accommodations.</p>
+      </div>
     </div>
   );
 };

@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./homepage.css";
 import Footer from "./footer";
 import BookingForm from "./Bookingform";
 
 const Homepage = () => {
-  const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-
-  const toggleShowAll = () => {
-    setShowAll(!showAll);
-  };
 
   const testimonials = [
     {
@@ -55,37 +50,20 @@ const Homepage = () => {
       <div className="amenities">
         <h2 className='facilities'>All of these facilities, all for you</h2>
         <ul className="amenities-list">
-          {showAll ? (
-            <>
-              <li><i className="fas fa-wind"></i> Air conditioning</li>
-              <li><i className="fas fa-baby"></i> Babysitting on request</li>
-              <li><i className="fas fa-cocktail"></i> Bar</li>
-              <li><i className="fas fa-child"></i> Services for children</li>
-              <li><i className="fas fa-iron"></i> Iron</li>
-              <li><i className="fas fa-handshake"></i> Meeting rooms</li>
-              <li><i className="fas fa-smoking-ban"></i> 100% Non Smoking Property</li>
-              <li><i className="fas fa-utensils"></i> Restaurant</li>
-              <li><i className="fas fa-concierge-bell"></i> Room service</li>
-              <li><i className="fas fa-tennis-ball"></i> Tennis</li>
-              <li><i className="fas fa-wheelchair"></i> Wheelchair accessible hotel</li>
-              <li><i className="fas fa-wifi"></i> Wi-Fi</li>
-              <li><i className="fas fa-leaf"></i> Ecocertified</li>
-              <li><i className="fas fa-tshirt"></i> Laundry / Valet Services</li>
-              <li><i className="fas fa-shuttle-van"></i> Shuttle</li>
-            </>
-          ) : (
-            <>
-              <li><i className="fas fa-wind"></i> Air conditioning</li>
-              <li><i className="fas fa-cocktail"></i> Bar</li>
-              <li><i className="fas fa-utensils"></i> Restaurant</li>
-              <li><i className="fas fa-wifi"></i> Wi-Fi</li>
-            </>
-          )}
+          <li><i className="fas fa-wind"></i> Air conditioning</li>
+          <li><i className="fas fa-cocktail"></i> Bar</li>
+          <li><i className="fas fa-child"></i> Services for children</li>
+          <li><i className="fas fa-handshake"></i> Meeting rooms</li>
+          
+          <li><i className="fas fa-utensils"></i> Restaurant</li>
+          <li><i className="fas fa-concierge-bell"></i> Room service</li>
+          <li><i className="fas fa-tennis-ball"></i> Tennis</li>
+        
+          <li><i className="fas fa-wifi"></i> Wi-Fi</li>
+     
+          <li><i className="fas fa-tshirt"></i> Laundry / Valet Services</li>
+          
         </ul>
-        <div className="show-more" onClick={toggleShowAll}>
-          <span>{showAll ? "Show Less Facilities" : "Show More Facilities"}</span>
-          <i className={`fas fa-chevron-${showAll ? "up" : "down"}`}></i>
-        </div>
       </div>
 
       <div className="container">

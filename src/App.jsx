@@ -26,7 +26,10 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 
 const App = () => {
   const location = useLocation();
-  const isAuthenticated = true; 
+
+
+  const isAuthenticated = true;
+
 
   return (
     <>

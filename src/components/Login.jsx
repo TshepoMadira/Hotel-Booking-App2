@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; 
+import { getFirestore, doc, getDoc } from 'firebase/firestore'; 
 import './Login.css'; 
 
 const Login = () => {
@@ -20,12 +22,28 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const auth = getAuth();
+    const db = getFirestore(); // Initialize Firestore
+
     try {
-      // Simulate login process
-      console.log('User logged in:', form);
-      // Here you would normally authenticate the user
-      // If login is successful, navigate to the next page
-      navigate('/checkavailabilityrooms');
+      const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
+      const user = userCredential.user;
+
+      // Get the user's document from Firestore
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+
+        // Check if the user is an admin
+        if (userData.role === 'admin') {
+          navigate('/adminreservations');
+        } else {
+          navigate('/checkavailabilityrooms');
+        }
+      } else {
+        setError('User document does not exist.');
+      }
     } catch (error) {
       setError(error.message);
     }
@@ -34,7 +52,7 @@ const Login = () => {
   return (
     <div className="login-pagee">
       <div className="login-image-container">
-        {/* Add your image or other content here */}
+        {/* Optional: Add a login image here */}
       </div>
       <div className="login">
         <h1>Login</h1>
@@ -61,7 +79,7 @@ const Login = () => {
               required
             />
           </div>
-          <button className='login-btn' type="submit">Login</button>
+          <button className='login-btnn' type="submit">Login</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
         <div style={{ marginTop: '10px' }}>

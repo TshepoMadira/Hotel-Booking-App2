@@ -6,13 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../Redux/Favoriteslice.js";
 import "./CheckavailabilityRooms.css";
 
+
+const Star = ({ filled }) => (
+  <span style={{ color: filled ? '#FFD700' : '#ccc' }}>&#9733;</span>
+);
+
 const CheckavailabilityRooms = () => {
   const today = new Date().toISOString().split("T")[0];
   const [checkInDate, setCheckInDate] = useState(today);
   const [checkOutDate, setCheckOutDate] = useState(today);
   const [rooms, setRooms] = useState([]);
+
   const [selectedRoomPrice, setSelectedRoomPrice] = useState(null);
   const favoriteRoomIds = useSelector((state) => state.Favorite.favoriteRoomIds);
+
+ 
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -54,6 +63,10 @@ const CheckavailabilityRooms = () => {
   const handleToggleFavorite = (roomId) => {
     dispatch(toggleFavorite(roomId));
   };
+
+  const filteredRooms = rooms.filter(room => 
+    room.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="container">
@@ -122,6 +135,7 @@ const CheckavailabilityRooms = () => {
                 </div>
               </div>
             ))
+
           ) : (
             <p>No rooms available</p>
           )}
