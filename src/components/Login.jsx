@@ -14,7 +14,7 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login } = useAuth(); // Use the login function from AuthContext
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -31,17 +31,15 @@ const Login = () => {
     const db = getFirestore();
 
     try {
-     
       const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
       const user = userCredential.user;
 
-    
       const userDoc = await getDoc(doc(db, 'users', user.uid));
 
       if (userDoc.exists()) {
         const userData = userDoc.data();
 
-       
+        // Update Redux state
         dispatch(setUser({
           id: user.uid,
           email: user.email,
@@ -49,10 +47,10 @@ const Login = () => {
           phone: userData.phone,
         }));
 
-        
+        // Update authentication state
         login();
 
-     
+        // Redirect based on user role
         if (userData.role === 'admin') {
           navigate('/adminreservations');
         } else {
@@ -68,9 +66,7 @@ const Login = () => {
 
   return (
     <div className="login-pagee">
-      <div className="login-image-container">
-        
-      </div>
+      <div className="login-image-container"></div>
       <div className="login">
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
