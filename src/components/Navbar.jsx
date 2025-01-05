@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../Redux/userSlice'; 
+import { logoutUser } from '../Redux/userSlice';
 import { useAuth } from '../components/AuthContext';
 import './navbar.css';
+import { FaUser, FaSignOutAlt, FaUserCog } from 'react-icons/fa';
 
 const Navbar = ({ isHomepage }) => {
   const [scrolling, setScrolling] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { logout } = useAuth(); 
+  const { logout } = useAuth();
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -32,8 +34,8 @@ const Navbar = ({ isHomepage }) => {
   }, [isHomepage]);
 
   const handleLogout = () => {
-    logout(); 
-    dispatch(logoutUser()); 
+    logout();
+    dispatch(logoutUser());
     localStorage.removeItem('userToken');
     navigate('/');
   };
@@ -42,20 +44,68 @@ const Navbar = ({ isHomepage }) => {
     navigate('/adminreservations');
   };
 
+  const handleProfileClick = () => {
+    navigate('/userprofile');
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
-      <ul>
-        <li><Link to="/signup">Signup</Link></li>
-        <li><Link to="/gallery">Gallery</Link></li>
-        <li><Link to="/aboutus">About Us</Link></li>
-        <li><Link to="/contactus">Contact Us</Link></li>
-        <li>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
-        </li>
-        <li>
-          <button onClick={handleAdminClick} className="admin-btn">Admin</button> 
-        </li>
-      </ul>
+      <div className="nav-content">
+      
+        <div className="logo-container">
+          <img
+            src="src/assets/images/Screenshot__2_-removebg-preview.png"
+            alt="Logo"
+            className="logo"
+          />
+          <span className="hotel-name">The Royal Dreamscape Hotel</span>
+        </div>
+
+     
+        <ul className="nav-links">
+          <li><Link to="/signup">Signup</Link></li>
+          <li><Link to="/gallery">Gallery</Link></li>
+          <li><Link to="/aboutus">About Us</Link></li>
+          <li><Link to="/contactus">Contact Us</Link></li>
+        </ul>
+
+    
+        <div className="hamburger-container">
+          <div className="hamburger" onClick={toggleMenu}>
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+          </div>
+
+         
+          <div className={`hamburger-menu ${isMenuOpen ? 'open' : ''}`}>
+            <ul>
+              <li>
+                <button onClick={handleProfileClick} className="profile-btn">
+                  <FaUser className="menu-icon" />
+                  Profile
+                </button>
+              </li>
+              <li>
+                <button onClick={handleAdminClick} className="admin-btn">
+                  <FaUserCog className="menu-icon" />
+                  Admin
+                </button>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="logout-btn">
+                  <FaSignOutAlt className="menu-icon" />
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 };
