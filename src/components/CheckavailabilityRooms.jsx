@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../Redux/Favoriteslice.js";
 import "./CheckavailabilityRooms.css";
 
-
 const Star = ({ filled }) => (
   <span style={{ color: filled ? '#FFD700' : '#ccc' }}>&#9733;</span>
 );
@@ -16,14 +15,16 @@ const CheckavailabilityRooms = () => {
   const [checkInDate, setCheckInDate] = useState(today);
   const [checkOutDate, setCheckOutDate] = useState(today);
   const [rooms, setRooms] = useState([]);
-
   const [selectedRoomPrice, setSelectedRoomPrice] = useState(null);
-  const favoriteRoomIds = useSelector((state) => state.Favorite.favoriteRoomIds);
 
- 
+  const favoriteRoomIds = useSelector((state) => {
+    console.log("Redux State:", state); 
+    return state.favorites.favoriteRoomIds || [];
+  });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -60,11 +61,27 @@ const CheckavailabilityRooms = () => {
     }
   };
 
-  const handleToggleFavorite = (roomId) => {
-    dispatch(toggleFavorite(roomId));
-  };
+  const handleToggleFavorite = async (roomId) => {
+    try {
+      // Dispatch the Redux action to toggle the favorite
+      dispatch(toggleFavorite(roomId));
 
- 
+      // Get the updated favoriteRoomIds from Redux state
+      const updatedFavoriteRoomIds = favoriteRoomIds.includes(roomId)
+        ? favoriteRoomIds.filter((id) => id !== roomId) // Remove if already favorited
+        : [...favoriteRoomIds, roomId]; // Add if not favorited
+
+      // Update Firestore with the new favoriteRoomIds
+      const userRef = doc(db, 'users', user.id);
+      await updateDoc(userRef, {
+        favoriteRoomIds: updatedFavoriteRoomIds,
+      });
+
+      console.log('Favorite accommodations updated in Firestore.');
+    } catch (error) {
+      console.error('Error updating favorite accommodations:', error);
+    }
+  };
 
   return (
     <div className="container">
@@ -133,7 +150,6 @@ const CheckavailabilityRooms = () => {
                 </div>
               </div>
             ))
-
           ) : (
             <p>No rooms available</p>
           )}
