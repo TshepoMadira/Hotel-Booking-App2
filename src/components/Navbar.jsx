@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../Redux/userSlice'; 
+import { useAuth } from '../components/AuthContext';
 import './navbar.css';
 
 const Navbar = ({ isHomepage }) => {
   const [scrolling, setScrolling] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { logout } = useAuth(); 
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -27,9 +32,10 @@ const Navbar = ({ isHomepage }) => {
   }, [isHomepage]);
 
   const handleLogout = () => {
-
+    logout(); 
+    dispatch(logoutUser()); 
+    localStorage.removeItem('userToken');
     navigate('/');
-
   };
 
   const handleAdminClick = () => {
@@ -39,9 +45,7 @@ const Navbar = ({ isHomepage }) => {
   return (
     <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
       <ul>
-
         <li><Link to="/signup">Signup</Link></li>
-
         <li><Link to="/gallery">Gallery</Link></li>
         <li><Link to="/aboutus">About Us</Link></li>
         <li><Link to="/contactus">Contact Us</Link></li>

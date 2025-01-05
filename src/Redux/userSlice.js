@@ -10,13 +10,21 @@ const userSlice = createSlice({
   },
   reducers: {
     setUser(state, action) {
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload }; 
     },
     updateUserProfile(state, action) {
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload }; 
+    },
+    logoutUser(state) {
+      return {
+        id: null,
+        name: '',
+        email: '',
+        phone: '',
+      }; 
     },
   },
 });
 
-export const { setUser, updateUserProfile } = userSlice.actions;
+export const { setUser, updateUserProfile, logoutUser } = userSlice.actions;
 export default userSlice.reducer;
