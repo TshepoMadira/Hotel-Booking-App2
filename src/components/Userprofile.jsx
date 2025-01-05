@@ -9,11 +9,12 @@ import './UserProfile.css';
 const UserProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const favorites = useSelector((state) => state.favorites?.favoriteRoomIds || []); // Fallback value
+  const favorites = useSelector((state) => state.favorites?.favoriteRoomIds || []);
   const [name, setName] = useState(user.name || '');
   const [phone, setPhone] = useState(user.phone || '');
   const [loading, setLoading] = useState(true);
   const [favoriteRooms, setFavoriteRooms] = useState([]);
+  const [bookingHistory, setBookingHistory] = useState([]);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -31,8 +32,10 @@ const UserProfile = () => {
           setPhone(userData.phone || '');
 
           if (userData.favoriteRoomIds) {
-            dispatch(setFavorites(userData.favoriteRoomIds)); 
-            fetchFavoriteRooms(userData.favoriteRoomIds); 
+       
+            dispatch(setFavorites(userData.favoriteRoomIds));
+        
+            fetchFavoriteRooms(userData.favoriteRoomIds);
           }
         } else {
           console.error('No such document!');
@@ -46,18 +49,46 @@ const UserProfile = () => {
 
     const fetchFavoriteRooms = async (roomIds) => {
       try {
-        const roomsCollection = collection(db, 'rooms'); 
-        const roomsQuery = query(roomsCollection, where('__name__', 'in', roomIds));
-        const roomsSnapshot = await getDocs(roomsQuery);
-        const roomsData = roomsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const accommodationsCollection = collection(db, 'accommodations');
+        const roomsData = [];
+        for (const roomId of roomIds) {
+          const roomDoc = await getDoc(doc(accommodationsCollection, roomId));
+          if (roomDoc.exists()) {
+            roomsData.push({ id: roomDoc.id, ...roomDoc.data() });
+          }
+        }
+        console.log('Favorite Rooms Data:', roomsData);
         setFavoriteRooms(roomsData);
       } catch (error) {
         console.error('Error fetching favorite rooms:', error);
       }
     };
 
+    const fetchBookingHistory = async () => {
+      if (!user.email) {
+        console.error('User email is null or undefined');
+        return;
+      }
+
+      try {
+        const bookingsCollection = collection(db, 'bookings');
+        const normalizedUserEmail = user.email.trim().toLowerCase();
+        const q = query(bookingsCollection, where('email', '==', normalizedUserEmail));
+        const bookingsSnapshot = await getDocs(q);
+        const bookingsData = bookingsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log('Booking History Data:', bookingsData);
+        setBookingHistory(bookingsData);
+      } catch (error) {
+        console.error('Error fetching booking history:', error);
+      }
+    };
+
     fetchUserProfile();
-  }, [user.id, dispatch]);
+    fetchBookingHistory();
+  }, [user.id, user.email, dispatch]);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -124,7 +155,21 @@ const UserProfile = () => {
 
       <div className="booking-history">
         <h2>Booking History</h2>
-        <p>You have no booking history.</p>
+        {bookingHistory.length > 0 ? (
+          bookingHistory.map((booking) => (
+            <div key={booking.id} className="booking-item">
+              <h3>Booking ID: {booking.id}</h3>
+              <p>Check-In: {booking.checkinDate}</p>
+              <p>Check-Out: {booking.checkoutDate}</p>
+              <p>Amount: R{booking.bookingAmount}</p>
+              <p>Rooms: {booking.numRooms}</p>
+              <p>Adults: {booking.numAdults}</p>
+              <p>Children: {booking.numChildren}</p>
+            </div>
+          ))
+        ) : (
+          <p>You have no booking history.</p>
+        )}
       </div>
 
       <div className="favorites">
@@ -132,8 +177,18 @@ const UserProfile = () => {
         {favoriteRooms.length > 0 ? (
           favoriteRooms.map((room) => (
             <div key={room.id} className="favorite-room">
-              <h3>{room.name}</h3>
-              <p>{room.description}</p>
+              <div className="favorite-room-image-container">
+                <img
+                  src={room.main_image || 'https://via.placeholder.com/150'} 
+                  alt={room.name}
+                  className="favorite-room-image"
+                />
+              </div>
+              <div className="favorite-room-details">
+                <h3>{room.name}</h3>
+                <p>{room.description}</p>
+                <p>Price: R{room.price}</p>
+              </div>
             </div>
           ))
         ) : (
