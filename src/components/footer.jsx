@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+;
 
 const Footer = () => {
     const [scrolling, setScrolling] = useState(false);
@@ -28,9 +28,30 @@ const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer-content">
+               
                 <div className="footer-left">
                     <img src="src/assets/images/Screenshot__2_-removebg-preview.png" alt="Logo" className="logo" />
+                    <div className="award-box">
+                        <div className="award-text">
+                            <div className="award-title-border">
+                                <p className="award-title">
+                                    TRAVELLERS<br />CHOICE<br />AWARDS
+                                </p>
+                            </div>
+                            <p className="award-description">
+                                DreamScape Hotel received a Travellers' Choice Award due to exceptional customer reviews for Accommodation in Brits.
+                            </p>
+                          
+                            <div className="rating">
+                                <span className="stars">★★★★★</span>
+                                <span className="rating-text">Rated 5/5 by Travellers</span>
+                            </div>
+                        </div>
+                     
+                       
+                    </div>
                 </div>
+               
                 <div className="footer-right">
                     <Link to="/aboutus">About Us</Link>
                     <Link to="/contactus">Contact Us</Link>
@@ -54,7 +75,7 @@ const Footer = () => {
                         <i className="fab fa-youtube"></i>
                     </a>
                 </div>
-                <p className="pp">© 2024 DREAMSCAPE International Limited. All rights reserved.</p>
+                <p className="pp">© 2025 DREAMSCAPE International Limited. All rights reserved.</p>
             </div>
             {scrolling && (
                 <button className="scroll-to-top" onClick={scrollToTop}>

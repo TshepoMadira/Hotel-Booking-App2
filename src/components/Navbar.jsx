@@ -56,14 +56,7 @@ const Navbar = ({ isHomepage }) => {
     <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
       <div className="nav-content">
       
-        <div className="logo-container">
-          <img
-            src="src/assets/images/Screenshot__2_-removebg-preview.png"
-            alt="Logo"
-            className="logo"
-          />
-          <span className="hotel-name">The Royal Dreamscape Hotel</span>
-        </div>
+       
 
      
         <ul className="nav-links">
