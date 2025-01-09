@@ -6,8 +6,8 @@
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: space-between; 
+    align-items: center; 
     margin-bottom: 20px;
 }
 
@@ -60,20 +60,21 @@
     padding: 5px; 
 }
 
-
-
 .footer-right {
     flex: 1;
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
 }
 
 .footer-right a {
-    display: block;
     color: white;
     text-decoration: none;
-    margin: 5px 0;
+    margin: 5px 0; 
     transition: color 0.3s;
-    font-size: 0.8rem; 
+    font-size: 1.1rem;
 }
 
 .footer-right a:hover {
@@ -139,7 +140,6 @@
     margin: 0; 
 }
 
-
 .award-title {
     font-size: 1.2rem; 
     margin: 0;
@@ -162,4 +162,3 @@
 .rating-text {
     font-size: 0.8rem;
 }
-
