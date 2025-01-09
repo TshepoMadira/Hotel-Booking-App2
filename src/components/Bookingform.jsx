@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './Bookingform.css';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from './Firebase'; 
+import { db } from './Firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 const BookingForm = () => {
   const [numAdults, setNumAdults] = useState(1);
@@ -10,76 +12,95 @@ const BookingForm = () => {
   const [checkOutDate, setCheckOutDate] = useState('');
   const [rooms, setRooms] = useState([]);
 
-  const increment = (setter, value) => setter(value + 1);
-  const decrement = (setter, value) => {
-    if (value > 0) setter(value - 1);
-  };
-
   const today = new Date().toISOString().split('T')[0];
 
   const checkAvailability = async () => {
     const roomsCollection = collection(db, 'accommodations');
     const roomsSnapshot = await getDocs(roomsCollection);
-    const roomsList = roomsSnapshot.docs.map(doc => ({
+    const roomsList = roomsSnapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
 
-    console.log('All Rooms:', roomsList); 
+    console.log('All Rooms:', roomsList);
 
-    const filteredRooms = roomsList.filter(room => {
-      return room.available === true; 
+    const filteredRooms = roomsList.filter((room) => {
+      return room.available === true;
     });
 
-    console.log('Filtered Rooms:', filteredRooms); 
+    console.log('Filtered Rooms:', filteredRooms);
 
     setRooms(filteredRooms);
   };
 
   return (
     <div className="booking-form">
+  
       <div className="date-picker">
-        <label className='label-Check-In'>
-          Check-In:
-          <input 
-            type="date" 
+        <label className="date-label">Check-In</label>
+        <div className="date-input-container">
+          <FontAwesomeIcon icon={faCalendarAlt} className="date-icon" /> 
+          <input
+            type="date"
             value={checkInDate}
             onChange={(e) => setCheckInDate(e.target.value)}
-            min={today} 
+            min={today}
+            className="date-input"
           />
-        </label>
-        <label className='label-Check-Out'>
-          Check-Out:
-          <input 
-            type="date" 
+        </div>
+        <label className="date-label">Check-Out</label>
+        <div className="date-input-container">
+          <FontAwesomeIcon icon={faCalendarAlt} className="date-icon" /> 
+          <input
+            type="date"
             value={checkOutDate}
             onChange={(e) => setCheckOutDate(e.target.value)}
             min={checkInDate || today}
+            className="date-input"
           />
-        </label>
-      </div>
-      <div className="guests-container">
-        <div className="guests">
-          <div className="guest-group">
-            <label className="Label">Adults</label>
-            <button onClick={() => decrement(setNumAdults, numAdults)}>-</button>
-            <span className="number">{numAdults}</span>
-            <button onClick={() => increment(setNumAdults, numAdults)}>+</button>
-          </div>
-          <div className="guest-group">
-            <label className="Label">Children</label>
-            <button onClick={() => decrement(setNumChildren, numChildren)}>-</button>
-            <span className="number">{numChildren}</span>
-            <button onClick={() => increment(setNumChildren, numChildren)}>+</button>
-          </div>
         </div>
       </div>
+
+     
+      <div className="guests-container">
+        <div className="guest-group">
+          <label className="guest-label">Adults</label>
+          <select
+            value={numAdults}
+            onChange={(e) => setNumAdults(Number(e.target.value))}
+            className="guest-select"
+          >
+            {[...Array(6).keys()].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="guest-group">
+          <label className="guest-label">Children</label>
+          <select
+            value={numChildren}
+            onChange={(e) => setNumChildren(Number(e.target.value))}
+            className="guest-select"
+          >
+            {[...Array(6).keys()].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       
-      <button className="check-availability-button" onClick={checkAvailability}>
+      <button className="checck-availabilityy" onClick={checkAvailability}>
         Check Availability
       </button>
+
+   
       <div className="rooms-list">
-        {rooms.map(room => (
+        {rooms.map((room) => (
           <div key={room.id} className="room-item">
             <h3>{room.name}</h3>
             <p>{room.description}</p>
