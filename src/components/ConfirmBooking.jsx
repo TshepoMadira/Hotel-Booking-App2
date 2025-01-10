@@ -82,7 +82,7 @@ function ConfirmBooking() {
   };
 
   const handleBack = () => {
-    navigate('/bookingplatform'); // Adjust this path as needed
+    navigate('/bookingplatform'); 
   };
 
   if (!location.state) {

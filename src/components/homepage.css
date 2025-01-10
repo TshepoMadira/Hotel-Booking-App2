@@ -26,6 +26,66 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
+.welcome-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.welcome-message {
+  flex: 1;
+  text-align: center;
+}
+
+.welcome-message h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.welcome-message .tagline {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.welcome-message .welcome-line {
+  width: 50%;
+  border: 1px solid #ccc;
+  margin: 0 auto 20px auto;
+}
+
+.welcome-message .location-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.right-content {
+  flex: 1;
+  text-align: center;
+}
+
+.right-content h1 {
+  font-size: 3rem;
+  color: #032b44;
+  margin-bottom: 20px;
+}
+
+.youtube-video {
+  width: 90%;
+  max-width: 500px;
+  height: 200px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 .container {
   padding: 20px;
   max-width: 1200px;

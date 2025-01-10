@@ -73,8 +73,8 @@ const Homepage = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, 
-    autoplaySpeed: 5000, 
+    autoplay: true,
+    autoplaySpeed: 5000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
@@ -131,6 +131,28 @@ const Homepage = () => {
           <li><i className="fas fa-wifi"></i> Wi-Fi</li>
           <li><i className="fas fa-tshirt"></i> Laundry / Valet Services</li>
         </ul>
+      </div>
+
+      <div className="welcome-section">
+        <div className="welcome-message">
+          <h2>Welcome To DreamScape Hotel</h2>
+          <p className="tagline">Luxury & Comfort</p>
+          <hr className="welcome-line" />
+          <p className="location-description">
+            Located just 120 km from Pretoria on the Platinum Freeway, tucked away in the heart of the Harteebeespoort Dam, the Dreamscape Hotel offers 5-star luxury hotel accommodation on the outskirts of Brits, flanked by the scenic Bojanala Region in the east, and endless savannahs that border the distant Magaliesberg mountain range.
+          </p>
+        </div>
+
+        <div className="right-content">
+          <h1>The DreamScape Hotel</h1>
+          <iframe
+            className="youtube-video"
+              src="https://www.youtube.com/embed/qemqQHaeCYo"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
       </div>
 
       <div className="container">

@@ -63,15 +63,15 @@ const CheckavailabilityRooms = () => {
 
   const handleToggleFavorite = async (roomId) => {
     try {
-      // Dispatch the Redux action to toggle the favorite
+     
       dispatch(toggleFavorite(roomId));
 
-      // Get the updated favoriteRoomIds from Redux state
+      
       const updatedFavoriteRoomIds = favoriteRoomIds.includes(roomId)
-        ? favoriteRoomIds.filter((id) => id !== roomId) // Remove if already favorited
-        : [...favoriteRoomIds, roomId]; // Add if not favorited
+        ? favoriteRoomIds.filter((id) => id !== roomId) 
+        : [...favoriteRoomIds, roomId]; 
 
-      // Update Firestore with the new favoriteRoomIds
+      
       const userRef = doc(db, 'users', user.id);
       await updateDoc(userRef, {
         favoriteRoomIds: updatedFavoriteRoomIds,
