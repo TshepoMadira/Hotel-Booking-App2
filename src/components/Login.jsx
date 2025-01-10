@@ -14,7 +14,7 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth(); // Use the login function from AuthContext
+  const { login } = useAuth(); 
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -39,7 +39,7 @@ const Login = () => {
       if (userDoc.exists()) {
         const userData = userDoc.data();
 
-        // Update Redux state
+       
         dispatch(setUser({
           id: user.uid,
           email: user.email,
@@ -47,10 +47,10 @@ const Login = () => {
           phone: userData.phone,
         }));
 
-        // Update authentication state
+       
         login();
 
-        // Redirect based on user role
+       
         if (userData.role === 'admin') {
           navigate('/adminreservations');
         } else {

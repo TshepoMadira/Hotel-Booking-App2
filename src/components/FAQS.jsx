@@ -39,7 +39,7 @@ const FAQS = () => {
         <p className="faq-answer">On-site parking is available for only R30 per night with maximum security.</p>
       </div>
 
-      {/* Back to Home Button */}
+      
       <Link to="/" className="home-button">
         Go to Home
       </Link>

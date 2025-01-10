@@ -1,50 +1,91 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
 
+function Contactus() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-const Contactus = () => {
-  const navigate = useNavigate(); 
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleBackHome = () => {
-    navigate('/'); 
+    const serviceID = "service_saxhxw5";
+    const templateID = "template_jx6vi08";
+    const userID = "HaUr40DNpgZEgcfxD";
+
+    emailjs.send(serviceID, templateID, formData, userID)
+      .then((response) => {
+        console.log("Email sent successfully!", response);
+        alert("Thank you for your message! I'll get back to you soon.");
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+      })
+      .catch((error) => {
+        console.error("Failed to send email:", error);
+        alert("Oops! Something went wrong. Please try again.");
+      });
   };
 
   return (
-    <div className="container">
-      <h2 className="heading">Contact Us</h2>
+    <section id="contact">
+      <h2>Get In Touch</h2>
       
-      <div className="contactItem">
-        <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
-        <div className="contactInfo">
-          <h3 className="title">Find Us Here</h3>
-          <p>5 Spoorweg Street, Brits, 0250 South Africa</p>
+      <form onSubmit={handleSubmit} className="contact-form">
+        <div className="form-group">
+          <label htmlFor="name">Your Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name" 
+            required
+          />
         </div>
-      </div>
-
-      <div className="contactItem">
-        <FontAwesomeIcon icon={faPhone} className="icon" />
-        <div className="contactInfo">
-          <h3 className="title">Call Us On</h3>
-          <p>079 123 4567</p>
+        <div className="form-group">
+          <label htmlFor="email">Your Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email" 
+            required
+          />
         </div>
-      </div>
-
-      <div className="contactItem">
-        <FontAwesomeIcon icon={faEnvelope} className="icon" />
-        <div className="contactInfo">
-          <h3 className="title">Write To Us</h3>
-          <p>info@example.com</p>
+        <div className="form-group">
+          <label htmlFor="message">Your Message</label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows="5"
+            placeholder="Your Message"
+            required
+          />
         </div>
-      </div>
-
-      <button className="backButton" onClick={handleBackHome}>
-        Back to Home
-      </button>
-    </div>
+        <button type="submit" className="cta-button">
+          Send Message
+        </button>
+      </form>
+    </section>
   );
-};
+}
 
 export default Contactus;

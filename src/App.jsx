@@ -1,6 +1,6 @@
-// App.js
+
 import React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom'; // No BrowserRouter here
+import { Route, Routes, useLocation } from 'react-router-dom'; 
 import './App.css';
 import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';

@@ -46,7 +46,7 @@ const TermsandConditions = () => {
                 <h2>10. Contact Us</h2>
                 <p>If you have any questions about these Terms or our app, please contact us at:</p>
                 
-                {/* Back to Home Link */}
+                
                 <Link to="/" className="back-home-button">
                     &larr; Back to Home
                 </Link>
