@@ -23,5 +23,28 @@
     font-weight: bold;
     margin-top: 10px;
   }
+
   
+  .home-arrow {
+    position: fixed; /* Fixed position to stay in place while scrolling */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    cursor: pointer; /* Pointer cursor on hover */
+    z-index: 1000; /* Ensure it's above other elements */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 50%; /* Circular shape */
+    padding: 10px; /* Padding around the arrow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .home-arrow:hover {
+    background-color: rgba(255, 255, 255, 1); /* Solid background on hover */
+  }
+  
+  .home-arrow svg {
+    display: block; /* Ensure the SVG is centered */
+    width: 24px; /* Icon size */
+    height: 24px; /* Icon size */
+  }
   

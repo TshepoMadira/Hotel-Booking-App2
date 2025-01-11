@@ -1,0 +1,101 @@
+
+#contact {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+ 
+  #contact h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-group {
+    width: 70%; 
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  
+  .form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+ 
+  .contact-name,
+  .email-contact,
+  .message-contact {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .contact-name:focus,
+  .email-contact:focus,
+  .message-contact:focus {
+    
+    outline: none;
+    
+  }
+  
+  
+  .message-contact {
+    resize: vertical; 
+  }
+  
+
+  .message-button {
+    width: 70%; 
+    padding: 10px;
+    background-color: #666;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .message-button:hover {
+    background-color: #333;
+  }
+
+
+  .home-arrow {
+    position: fixed; 
+    top: 20px; 
+    left: 20px; 
+    cursor: pointer;
+    z-index: 1000; 
+    background-color: #666; 
+    border-radius: 50%; 
+    padding: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s ease;
+    margin-top: 60px 
+  }
+  
+  .home-arrow:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  .home-arrow svg {
+    display: block; 
+    width: 24px; 
+    height: 24px; 
+  }
