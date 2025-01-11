@@ -88,12 +88,12 @@
 
 .container {
   padding: 20px;
-  max-width: 800px; 
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .room-container {
-  width: 80%; 
+  width: 80%;
   height: 500px;
   margin: 0 auto;
   display: flex;
@@ -107,7 +107,7 @@
 .room-image {
   width: 100%;
   height: auto;
-  max-width: 300px; 
+  max-width: 300px;
   border-radius: 10px;
 }
 
@@ -157,7 +157,7 @@
 .book-button {
   width: 90px;
   height: 40px;
-  color: #333; 
+  color: #333;
   font-weight: bold;
 }
 
@@ -177,6 +177,7 @@
 }
 
 .testimonial {
+  position: relative;
   min-width: 350px;
   margin-right: 20px;
   flex: none;
@@ -191,9 +192,32 @@
   transform: translateY(-5px);
 }
 
+.testimonial-content {
+  position: relative;
+  padding: 0 30px;
+}
+
+.testimonial-quote {
+  position: absolute;
+  font-size: 2rem;
+  color: #555;
+  opacity: 0.7;
+}
+
+.fa-quote-left {
+  top: 0;
+  left: 0;
+}
+
+.fa-quote-right {
+  bottom: 0;
+  right: 0;
+}
+
 .testimonial-text {
   font-style: italic;
   color: #555;
+  margin: 10px 0;
 }
 
 .testimonial-name {

@@ -202,21 +202,25 @@ const Homepage = () => {
   </Slider>
 </div>
 
-      <div className="testimonials">
-        <h2 className='testimonials-heading'>What Our Guests Say</h2>
-        <div className="testimonial-container">
-          <div className="testimonial-list">
-            {testimonials.map((testimonial, index) => (
-              <div className="testimonial" key={index}>
-                <div className="testimonial-content">
-                  <p className="testimonial-text">"{testimonial.text}"</p>
-                  <p className="testimonial-name">- {testimonial.name}</p>
-                </div>
-              </div>
-            ))}
+<div className="testimonials">
+  <h2 className="testimonials-heading">What Our Guests Say</h2>
+  <div className="testimonial-container">
+    <div className="testimonial-list">
+      {testimonials.map((testimonial, index) => (
+        <div className="testimonial" key={index}>
+          <div className="testimonial-content">
+            
+            <i className="fas fa-quote-left testimonial-quote"></i>
+            <p className="testimonial-text">{testimonial.text}</p>
+            
+            <i className="fas fa-quote-right testimonial-quote"></i>
+            <p className="testimonial-name">- {testimonial.name}</p>
           </div>
         </div>
-      </div>
+      ))}
+    </div>
+  </div>
+</div>
 
       <Footer />
     </div>
