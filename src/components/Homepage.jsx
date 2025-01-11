@@ -37,17 +37,17 @@ const Homepage = () => {
     {
       title: "King Suite",
       image: "src/assets/images/Bernhardt Maxime King Upholstered Wing Panel Bed in Cream _ Wood _ Nebraska Furniture Mart.jpeg",
-      description: "- Two bathrooms with double sink vanity\n- Flat screen TV\n- Full size sofa with lounge chairs\n- Free Uncapped wifi\n- Private Balcony",
+      
     },
     {
       title: "Queen Suite",
       image: "src/assets/images/Queen Size Lift Up Storage Bed Frame Upholstered Platform Bed with Gas Lift up Hydraulic Storage and Gold Stripes Headboard.jpeg",
-      description: "- Queen size bed with plush pillows and high-quality linens\n- Spacious bathroom with separate shower and bathtub\n- Flatscreen TV with premium channels",
+     
     },
     {
       title: "Presidential Suite",
       image: "src/assets/images/Design firm Gettys and The Peninsula Hong Kong redefine the luxury travel experience.jpeg",
-      description: "- Comfortable bed\n- Single vanity with high-end fixtures\n- Complimentary breakfast\n- Flat screen TV with premium channels\n- Sofa bed for extra sleep",
+    
     },
     {
       title: "Luxury Suite",
@@ -65,18 +65,51 @@ const Homepage = () => {
       title: "Honeymoon Suite",
       image: "src/assets/images/5f3d5ed3-d71e-463f-9048-03f9a79372de.jpeg",
     },
+    {
+      title: "Pool Area",
+      image: "src/assets/images/WELLNESS&POOL MIX Ceramic Pool liner By Appiani.jpeg",
+    },
+    {
+      title: "Gym Area",
+      image: "src/assets/images/Launch — Vida Design.jpeg",
+    },
+    {
+      title: "Spa",
+      image: "src/assets/images/Love the idea of having showers in the room to….jpeg",
+    }, 
   ];
 
+  
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 2,
+    slidesToScroll: 2,
     autoplay: true,
     autoplaySpeed: 5000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    centerMode: true,
+    centerPadding: "0",
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+        },
+      },
+      {
+        breakpoint: 480, 
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+        },
+      },
+    ],
   };
 
   function SampleNextArrow(props) {
@@ -112,7 +145,7 @@ const Homepage = () => {
         <div className="overlay">
           <h1>DREAMSCAPE HOTEL</h1>
           <p className="slogan">Luxury and Comfort</p>
-          <button onClick={handleBookNow} className="book-now-btn">Book</button>
+          <button onClick={handleBookNow} className="book-button">Book</button>
         </div>
       </header>
 
@@ -154,24 +187,23 @@ const Homepage = () => {
           ></iframe>
         </div>
       </div>
-
       <div className="container">
-        <h3>Our Luxurious Rooms</h3>
-        <Slider {...settings}>
-          {roomOffers.map((room, index) => (
-            <div className="room-container" key={index}>
-              <h3>{room.title}</h3>
-              <img src={room.image} alt={room.title} className="room-image" />
-              <div className="room-description">
-                <p>{room.description}</p>
-              </div>
-            </div>
-          ))}
-        </Slider>
+  <h3 className='luxurius'>Our Luxurious Rooms</h3>
+  <Slider {...settings}>
+    {roomOffers.map((room, index) => (
+      <div className="room-container" key={index}>
+        <h3>{room.title}</h3>
+        <img src={room.image} alt={room.title} className="room-image" />
+        <div className="room-description">
+          
+        </div>
       </div>
+    ))}
+  </Slider>
+</div>
 
       <div className="testimonials">
-        <h2>What Our Guests Say</h2>
+        <h2 className='testimonials-heading'>What Our Guests Say</h2>
         <div className="testimonial-container">
           <div className="testimonial-list">
             {testimonials.map((testimonial, index) => (
