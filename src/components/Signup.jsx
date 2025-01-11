@@ -3,7 +3,7 @@ import { auth, db } from '../components/Firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import './Signup.css'
+import './Signup.css';
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -51,9 +51,7 @@ const Signup = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (form.password !== form.confirmPassword) {
       setError('Password and confirm password do not match.');
       return;
@@ -82,69 +80,71 @@ const Signup = () => {
   };
 
   return (
-    <div className='Signup-Containerr'>
-      <h1 className='signup'>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label className="firstNamee">First Name:</label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={form.firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label className="lastNamee">Last Name:</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={form.lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label className="emaill">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label className="passssword">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-          {passwordStrength && <p style={{ color: passwordStrength === 'Strong password' ? 'green' : 'red' }}>{passwordStrength}</p>}
-        </div>
-        <div>
-          <label className="confirmPasswordd">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button className='enter' type="submit">Enter</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </form>
-      <div style={{ marginTop: '10px' }}>
+    <div className="signup-container">
+      <h1 className='register'>Sign Up</h1>
+      <div className="input-container">
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          value={form.firstName}
+          onChange={handleChange}
+          className="input-field"
+          required
+        />
+      </div>
+      <div className="input-container">
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={form.lastName}
+          onChange={handleChange}
+          className="input-field"
+          required
+        />
+      </div>
+      <div className="input-container">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+          className="input-field"
+          required
+        />
+      </div>
+      <div className="input-container">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          className="input-field"
+          required
+        />
+        {passwordStrength && (
+          <p className={`password-strength ${passwordStrength === 'Strong password' ? 'strong' : 'weak'}`}>
+            {passwordStrength}
+          </p>
+        )}
+      </div>
+      <div className="input-container">
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={form.confirmPassword}
+          onChange={handleChange}
+          className="input-field"
+          required
+        />
+      </div>
+      <button className='enterr-button' onClick={handleSubmit}>Enter</button>
+      {error && <p className="error-message">{error}</p>}
+      <div className="forgot-password-container">
         <a className='forgot-password-link' href="/forgotpassword">Forgot Password?</a>
       </div>
     </div>
