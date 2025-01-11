@@ -145,7 +145,7 @@ const Homepage = () => {
         <div className="overlay">
           <h1>DREAMSCAPE HOTEL</h1>
           <p className="slogan">Luxury and Comfort</p>
-          <button onClick={handleBookNow} className="book-button">Book</button>
+          <button onClick={handleBookNow} className="book-btnnn">Book</button>
         </div>
       </header>
 

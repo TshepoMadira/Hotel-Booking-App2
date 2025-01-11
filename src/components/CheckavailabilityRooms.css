@@ -1,4 +1,4 @@
-.container {
+.checkavailability-container {
   padding: 20px;
 }
 
@@ -36,7 +36,7 @@
   margin-top: 20px;
 }
 
-.room-card {
+.rooms-card {
   display: flex;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -47,12 +47,12 @@
 
 }
 
-.room-image-container {
+.rooms-image-container {
   position: relative;
   flex: 1;
 }
 
-.room-image {
+.rooms-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -72,7 +72,7 @@
   color: red;
 }
 
-.room-details {
+.rooms-details {
   flex: 2;
   padding: 15px;
   display: flex;
@@ -85,13 +85,13 @@
   font-size: 20px;
 }
 
-.room-description {
+.rooms-description {
   margin: 10px 0;
   font-size: 14px;
   color: #555;
 }
 
-.book-button {
+.booknow-button {
   padding: 10px 20px;
   background-color: #726555;
   color: white;
@@ -101,12 +101,12 @@
   align-self: flex-start;
 }
 
-.book-button:hover {
+.booknow-button:hover {
   background-color: #312c25;
 }
 
 
-.room-price {
+.rooms-price {
   font-weight: bold;
   color: #726555; 
   margin: 10px 0;
@@ -114,29 +114,13 @@
 
 
 
-
-
-
-.search-container {
-  margin: 20px 0; 
+.ratings-stars {
   display: flex;
-  justify-content: center; 
+  flex-direction: row; 
+
 }
 
-.search-container input {
-  padding: 10px;
-  border: 1px solid #f5f2e9;
-  border-radius: 4px;
-  width: 300px; 
-  max-width: 100%; 
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-}
-
-.rating span {
+.ratings span {
   margin-left: 5px;
 }
 

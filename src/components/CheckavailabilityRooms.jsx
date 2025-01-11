@@ -102,15 +102,15 @@ const CheckavailabilityRooms = () => {
   };
 
   return (
-    <div className="container">
+    <div className="checkavailability-container">
       <div className="rooms-list">
         <h2>Available Rooms</h2>
-        <div className="rooms-grid">
+        <div >
           {rooms.length > 0 ? (
             rooms.map((room) => (
-              <div key={room.id} className="room-card">
-                <div className="room-image-container">
-                  <img src={room.main_image} alt={room.name} className="room-image" />
+              <div key={room.id} className="rooms-card">
+                <div className="rooms-image-container">
+                  <img src={room.main_image} alt={room.name} className="rooms-image" />
                   <button
                     className={`favorite-icon ${favoriteRoomIds.includes(room.id) ? "favorited" : ""}`}
                     onClick={() => handleToggleFavorite(room.id)}
@@ -118,17 +118,18 @@ const CheckavailabilityRooms = () => {
                     {favoriteRoomIds.includes(room.id) ? "❤️" : "🤍"}
                   </button>
                 </div>
-                <div className="room-details">
+                <div className="rooms-details">
                   <h3>{room.name}</h3>
-                  <p className="room-description">{room.description}</p>
-                  <p className="room-price">Price: R{room.price}</p>
+                  <p className="rooms-description">{room.description}</p>
+                  <p className="rooms-price">Price: R{room.price}</p>
                   <Rating
                     roomId={room.id}
                     initialRating={ratings[room.id] || 0}
                     onRatingChange={handleRatingChange}
+                    className='ratings-stars'
                   />
                   <button
-                    className="book-button"
+                    className="booknow-button"
                     onClick={() => handleBooking(room.id, room.price)}
                   >
                     Book Now
