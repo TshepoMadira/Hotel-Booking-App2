@@ -2,8 +2,7 @@
 .signup-container {
   max-width: 300px;
   margin: 50px auto;
-  padding: 20px;
-  text-align: center; 
+  text-align: center;
 }
 
 
@@ -13,19 +12,14 @@
 }
 
 
-.input-container {
-  margin-bottom: 15px;
-}
-
-
 .input-field {
-  width: 90%; 
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin-bottom: 15px;
 }
 
 .input-field:focus {
@@ -50,19 +44,19 @@
 
 
 .enterr-button {
-  width: 90%; 
+  width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #666;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  margin: 0 auto;
+  margin-bottom: 15px;
 }
 
-.enter-button:hover {
-  background-color: #0056b3;
+.enterr-button:hover {
+  background-color: #333;
 }
 
 
@@ -78,7 +72,7 @@
 }
 
 .forgot-password-link {
-  color: #007bff;
+  color: #333;
   text-decoration: none;
 }
 

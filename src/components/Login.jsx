@@ -47,7 +47,7 @@ const Login = () => {
           phone: userData.phone,
         }));
 
-       
+      
         login();
 
        
@@ -65,42 +65,39 @@ const Login = () => {
   };
 
   return (
-    <div className="login-pagee">
-      <div className="login-image-container"></div>
-      <div className="login">
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button className='login-btnn' type="submit">Login</button>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </form>
-        <div style={{ marginTop: '10px' }}>
-          <a href="/forgotpassword" style={{ color: '#af960c' }}>Forgot Password?</a>
+    <div className="login-container">
+      <h1 className='login-heading'>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            className="input-field"
+            required
+          />
         </div>
-        <div style={{ marginTop: '10px' }}>
-          <a href="/signup" style={{ color: '#af960c' }}>Need an account? Sign Up</a>
+        <div className="input-container">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="input-field"
+            required
+          />
         </div>
+        <button className='login-button' type="submit">Login</button>
+        {error && <p className="error-message">{error}</p>}
+      </form>
+      <div className="forgot-password-container">
+        <a className='forgot-password-link' href="/forgotpassword">Forgot Password?</a>
+      </div>
+      <div className="signup-link-container">
+        <a className='signup-link' href="/signup">Need an account? Sign Up</a>
       </div>
     </div>
   );

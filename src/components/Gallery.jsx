@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import { useNavigate } from 'react-router-dom'; 
+import { FaArrowLeft } from 'react-icons/fa';
 import './Gallery.css'; 
 
 const images = {
@@ -58,11 +60,11 @@ const Gallery = () => {
             </header>
 
             
-            <button className="back-home" onClick={handleBackHome}>
-                ← Back Home
-            </button>
+           <div className="home-arrow" onClick={() => navigate("/")}>
+                   <FaArrowLeft size={24} /> 
+                 </div>
 
-            <nav className="gallery-nav">
+            <nav className="gallery-navbar">
                 <button className='showall' onClick={showAll}>Show All</button>
                 <button className='king' onClick={() => showCategory('king')}>King Suite</button>
                 <button className='queen' onClick={() => showCategory('queen')}>Queen Suite</button>

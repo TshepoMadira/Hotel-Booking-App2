@@ -42,7 +42,7 @@ const Footer = () => {
                                 DreamScape Hotel received a Travellers' Choice Award due to exceptional customer reviews for Accommodation in Brits.
                             </p>
                           
-                            <div className="rating">
+                            <div className="ratings">
                                 <span className="stars">★★★★★</span>
                                 <span className="rating-text">Rated 5/5 by Travellers</span>
                             </div>

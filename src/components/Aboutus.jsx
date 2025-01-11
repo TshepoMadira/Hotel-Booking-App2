@@ -1,12 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
-import './About.css'
-
+import { Link, useNavigate } from 'react-router-dom'; 
+import './About.css';
 
 const Aboutus = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
-     
+      
+      <div className="home-arrow" onClick={() => navigate("/")}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </div>
 
       <h2>About Us</h2>
       <p className='history'>
@@ -31,21 +47,7 @@ const Aboutus = () => {
       <p className='Address'>Address: 5 Spoorweg Street, Brits 0250, South Africa</p>
 
      
-      <Link 
-        to="/" 
-        className="home-button" 
-        style={{ 
-          display: 'inline-block', 
-          padding: '10px 15px', 
-          backgroundColor: '#726555', 
-          color: 'white', 
-          textDecoration: 'none', 
-          borderRadius: '5px', 
-          marginTop: '20px' 
-        }}
-      >
-        Go to Home
-      </Link>
+     
     </div>
   );
 };

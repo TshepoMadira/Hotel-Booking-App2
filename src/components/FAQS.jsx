@@ -1,12 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
-import { FaArrowLeft } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'; 
+import { FaArrowLeft } from 'react-icons/fa'; 
 import './FAQS.css';
 
 const FAQS = () => {
+  const navigate = useNavigate(); 
+
   return (
     <div className="faqs-container">
-      
+    
+      <div className="home-arrow" onClick={() => navigate("/")}>
+        <FaArrowLeft size={20} />
+      </div>
+
       <h2 className="faqs-heading">Frequently Asked Questions</h2>
       
       <div className="faq-item">
@@ -38,11 +44,6 @@ const FAQS = () => {
         <h3 className="faq-question">Do you have on-site parking?</h3>
         <p className="faq-answer">On-site parking is available for only R30 per night with maximum security.</p>
       </div>
-
-      
-      <Link to="/" className="home-button">
-        Go to Home
-      </Link>
     </div>
   );
 };
