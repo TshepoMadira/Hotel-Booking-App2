@@ -1,5 +1,6 @@
 .checkavailability-container {
   padding: 20px;
+  margin-top: 50px;
 }
 
 .booking-form {
@@ -21,7 +22,7 @@
 
 .check-availability-button {
   padding: 10px 20px;
-  background-color: #726555;
+  background-color: #666;
   color: white;
   border: none;
   border-radius: 5px;
@@ -29,7 +30,7 @@
 }
 
 .check-availability-button:hover {
-  background-color: #312c25;
+  background-color: #333;
 }
 
 .rooms-list {
@@ -93,7 +94,7 @@
 
 .booknow-button {
   padding: 10px 20px;
-  background-color: #726555;
+  background-color: #666;
   color: white;
   border: none;
   border-radius: 5px;
@@ -102,7 +103,7 @@
 }
 
 .booknow-button:hover {
-  background-color: #312c25;
+  background-color: #333;
 }
 
 

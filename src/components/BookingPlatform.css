@@ -78,7 +78,7 @@ form .room-controls span {
 .confirm-bookingplatfrom {
   width: 100%;
   padding: 15px;
-  background-color: #726555;
+  background-color: #666;
   color: white;
   border: none;
   border-radius: 6px;
@@ -89,7 +89,7 @@ form .room-controls span {
 }
 
 .confirm-bookingplatfrom:hover {
-  background-color: #312c25;
+  background-color: #333;
 }
 
 
@@ -215,7 +215,7 @@ form .room-controls span {
 
 .quantity-button {
   padding: 8px 12px;
-  background-color: #726555;
+  background-color: #666;
   color: white;
   border: none;
   border-radius: 6px;
@@ -225,7 +225,7 @@ form .room-controls span {
 }
 
 .quantity-button:hover {
-  background-color: #312c25;
+  background-color: #333;
 }
 
 .quantity-value {

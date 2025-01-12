@@ -100,7 +100,7 @@ body {
   }
   
   .checck-availabilityy {
-    background-color: #726555;
+    background-color: #666;
     padding: 10px;
     color: white;
     border: none;
@@ -109,6 +109,9 @@ body {
     font-size: 1.1em;
     transition: background-color 0.3s;
     width: 100%;
+  }
+  .checck-availabilityy:hover{
+    background-color: #333;
   }
   
  

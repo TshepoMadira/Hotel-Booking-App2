@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; 
 import { updateUserProfile } from '../Redux/userSlice';
 import { setFavorites } from '../Redux/Favoriteslice';
 import { db } from './Firebase';
 import { doc, getDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { FaArrowLeft } from 'react-icons/fa'; 
 import './UserProfile.css';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const favorites = useSelector((state) => state.favorites?.favoriteRoomIds || []);
   const [name, setName] = useState(user.name || '');
@@ -32,9 +35,7 @@ const UserProfile = () => {
           setPhone(userData.phone || '');
 
           if (userData.favoriteRoomIds) {
-       
             dispatch(setFavorites(userData.favoriteRoomIds));
-        
             fetchFavoriteRooms(userData.favoriteRoomIds);
           }
         } else {
@@ -119,6 +120,11 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-container">
+
+      <div className="home-arrow" onClick={() => navigate('/confirmbooking')}>
+        <FaArrowLeft size={24} />
+      </div>
+
       <h1 className="user-profile-title">User Profile</h1>
       <form className="user-profile-form" onSubmit={handleUpdateProfile}>
         <label className="user-profile-label">
@@ -172,14 +178,14 @@ const UserProfile = () => {
         )}
       </div>
 
-      <div className="favorites">
+      <div className="room-favorites">
         <h2>Favorite Accommodations</h2>
         {favoriteRooms.length > 0 ? (
           favoriteRooms.map((room) => (
             <div key={room.id} className="favorite-room">
               <div className="favorite-room-image-container">
                 <img
-                  src={room.main_image || 'https://via.placeholder.com/150'} 
+                  src={room.main_image || 'https://via.placeholder.com/150'}
                   alt={room.name}
                   className="favorite-room-image"
                 />
