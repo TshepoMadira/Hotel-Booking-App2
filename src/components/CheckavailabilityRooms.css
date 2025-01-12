@@ -150,3 +150,18 @@
 
 
 
+.date-pickers {
+  margin-bottom: 20px;
+}
+
+.date-pickers label {
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.date-pickers input[type="date"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}

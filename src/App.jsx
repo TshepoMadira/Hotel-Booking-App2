@@ -18,6 +18,7 @@ import ConfirmBooking from './components/ConfirmBooking';
 import PayPalButton from './components/PayPalButton';
 import AdminReservations from './components/Admin/AdminReservations';
 import UserProfile from './components/Userprofile';
+import RoomsList from './components/RoomsList';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import { AuthProvider } from './components/AuthContext'; 
 
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/faqs" element={<FAQS />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/roomlist" element={<RoomsList />} />
 
         
         <Route

@@ -11,9 +11,10 @@ import "./CheckavailabilityRooms.css";
 import { FaWifi, FaSwimmingPool, FaParking, FaUtensils, FaTv } from "react-icons/fa";
 
 const CheckavailabilityRooms = () => {
-  const today = new Date().toISOString().split("T")[0];
   const [rooms, setRooms] = useState([]);
   const [selectedRoomPrice, setSelectedRoomPrice] = useState(null);
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
 
   const favoriteRoomIds = useSelector((state) => state.favorites.favoriteRoomIds || []);
   const ratings = useSelector((state) => state.ratings.ratings);
@@ -45,6 +46,11 @@ const CheckavailabilityRooms = () => {
   }, [dispatch]);
 
   const handleBooking = async (roomId, roomPrice) => {
+    if (!checkInDate || !checkOutDate) {
+      alert("Please select both check-in and check-out dates.");
+      return;
+    }
+
     try {
       const roomRef = doc(db, "accommodations", roomId);
       await updateDoc(roomRef, {
@@ -52,7 +58,7 @@ const CheckavailabilityRooms = () => {
       });
 
       setSelectedRoomPrice(roomPrice);
-      const bookingPath = `/bookingplatform?roomId=${roomId}&checkIn=${today}&checkOut=${today}&roomPrice=${roomPrice}`;
+      const bookingPath = `/bookingplatform?roomId=${roomId}&checkIn=${checkInDate}&checkOut=${checkOutDate}&roomPrice=${roomPrice}`;
       navigate(bookingPath);
 
       setRooms((prevRooms) =>
@@ -99,7 +105,6 @@ const CheckavailabilityRooms = () => {
     }
   };
 
-  
   const getRoomAmenities = (roomId) => {
     const amenities = [
       { icon: <FaWifi />, label: "Free Wi-Fi" },
@@ -115,6 +120,26 @@ const CheckavailabilityRooms = () => {
     <div className="checkavailability-container">
       <div className="rooms-list">
         <h2>Available Rooms</h2>
+        <div className="date-pickers">
+          <label>
+            Check-in Date:
+            <input
+              type="date"
+              value={checkInDate}
+              onChange={(e) => setCheckInDate(e.target.value)}
+              min={new Date().toISOString().split("T")[0]} 
+            />
+          </label>
+          <label>
+            Check-out Date:
+            <input
+              type="date"
+              value={checkOutDate}
+              onChange={(e) => setCheckOutDate(e.target.value)}
+              min={checkInDate || new Date().toISOString().split("T")[0]} 
+            />
+          </label>
+        </div>
         <div>
           {rooms.length > 0 ? (
             rooms.map((room) => (
