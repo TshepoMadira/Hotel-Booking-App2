@@ -4,13 +4,14 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './Firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom'; 
 
 const BookingForm = () => {
   const [numAdults, setNumAdults] = useState(1);
   const [numChildren, setNumChildren] = useState(0);
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
-  const [rooms, setRooms] = useState([]);
+  const navigate = useNavigate(); 
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -30,12 +31,11 @@ const BookingForm = () => {
 
     console.log('Filtered Rooms:', filteredRooms);
 
-    setRooms(filteredRooms);
+    navigate('/roomlist', { state: { rooms: filteredRooms } });
   };
 
   return (
     <div className="booking-form">
-  
       <div className="date-picker">
         <label className="date-label">Check-In</label>
         <div className="date-input-container">
@@ -61,7 +61,6 @@ const BookingForm = () => {
         </div>
       </div>
 
-     
       <div className="guests-container">
         <div className="guest-group">
           <label className="guest-label">Adults</label>
@@ -93,23 +92,9 @@ const BookingForm = () => {
         </div>
       </div>
 
-      
       <button className="checck-availabilityy" onClick={checkAvailability}>
         Check Availability
       </button>
-
-   
-      <div className="rooms-list">
-        {rooms.map((room) => (
-          <div key={room.id} className="room-item">
-            <h3>{room.name}</h3>
-            <p>{room.description}</p>
-            <p>Price: ${room.price}</p>
-            <p>Ratings: {room.ratings}/5</p>
-            <img src={room.main_image} alt={room.name} style={{ width: '100%', maxWidth: '300px' }} />
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
