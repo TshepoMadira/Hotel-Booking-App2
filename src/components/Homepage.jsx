@@ -145,7 +145,7 @@ const Homepage = () => {
         <div className="overlay">
           <h1>DREAMSCAPE HOTEL</h1>
           <p className="slogan">Luxury and Comfort</p>
-          <button onClick={handleBookNow} className="book-btnnn">Book</button>
+          <button onClick={handleBookNow} className="booking-now">Book Now</button>
         </div>
       </header>
 
@@ -187,8 +187,8 @@ const Homepage = () => {
           ></iframe>
         </div>
       </div>
-      <div className="container">
-  <h3 className='luxurius'>Our Luxurious Rooms</h3>
+      <div className="room-offers-container">
+  <h3 className='luxurius-room-heading'>Our Luxurious Rooms</h3>
   <Slider {...settings}>
     {roomOffers.map((room, index) => (
       <div className="room-container" key={index}>

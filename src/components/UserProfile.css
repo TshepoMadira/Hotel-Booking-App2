@@ -33,3 +33,15 @@
 .favorite-room-details p {
   margin: 5px 0;
 }
+
+.user-profile-button{
+  background-color: #666;
+  color: white;
+  border-radius: 5px;
+  height: 40px;
+  border: none;
+}
+
+.user-profile-button:hover{
+  background-color: #333;
+}

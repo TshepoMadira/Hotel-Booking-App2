@@ -8,6 +8,8 @@ import { setRating, initializeRatings } from "../Redux/ratingSlice.js";
 import Rating from "../components/Rating";
 import "./CheckavailabilityRooms.css";
 
+import { FaWifi, FaSwimmingPool, FaParking, FaUtensils, FaTv } from "react-icons/fa";
+
 const CheckavailabilityRooms = () => {
   const today = new Date().toISOString().split("T")[0];
   const [rooms, setRooms] = useState([]);
@@ -22,7 +24,6 @@ const CheckavailabilityRooms = () => {
 
   useEffect(() => {
     const fetchRoomsAndRatings = async () => {
-     
       const roomsCollection = collection(db, "accommodations");
       const q = query(roomsCollection, where("available", "==", true));
       const roomsSnapshot = await getDocs(q);
@@ -32,13 +33,12 @@ const CheckavailabilityRooms = () => {
       }));
       setRooms(roomsList);
 
-      
       const ratingsSnapshot = await getDocs(collection(db, "ratings"));
       const ratingsData = {};
       ratingsSnapshot.forEach((doc) => {
         ratingsData[doc.id] = doc.data().rating;
       });
-      dispatch(initializeRatings(ratingsData)); 
+      dispatch(initializeRatings(ratingsData));
     };
 
     fetchRoomsAndRatings();
@@ -86,10 +86,8 @@ const CheckavailabilityRooms = () => {
 
   const handleRatingChange = async (roomId, newRating) => {
     try {
-     
       dispatch(setRating({ roomId, rating: newRating }));
 
-      
       const ratingRef = doc(db, "ratings", roomId);
       await updateDoc(ratingRef, {
         rating: newRating,
@@ -101,11 +99,23 @@ const CheckavailabilityRooms = () => {
     }
   };
 
+  
+  const getRoomAmenities = (roomId) => {
+    const amenities = [
+      { icon: <FaWifi />, label: "Free Wi-Fi" },
+      { icon: <FaSwimmingPool />, label: "Pool" },
+      { icon: <FaParking />, label: "Parking" },
+      { icon: <FaUtensils />, label: "Restaurant" },
+      { icon: <FaTv />, label: "TV" },
+    ];
+    return amenities;
+  };
+
   return (
     <div className="checkavailability-container">
       <div className="rooms-list">
         <h2>Available Rooms</h2>
-        <div >
+        <div>
           {rooms.length > 0 ? (
             rooms.map((room) => (
               <div key={room.id} className="rooms-card">
@@ -122,11 +132,19 @@ const CheckavailabilityRooms = () => {
                   <h3>{room.name}</h3>
                   <p className="rooms-description">{room.description}</p>
                   <p className="rooms-price">Price: R{room.price}</p>
+                  <div className="amenities-hotel">
+                    {getRoomAmenities(room.id).map((amenity, index) => (
+                      <div key={index} className="amenity-item">
+                        {amenity.icon}
+                        <span>{amenity.label}</span>
+                      </div>
+                    ))}
+                  </div>
                   <Rating
                     roomId={room.id}
                     initialRating={ratings[room.id] || 0}
                     onRatingChange={handleRatingChange}
-                    className='ratings-stars'
+                    className="ratings-stars"
                   />
                   <button
                     className="booknow-button"

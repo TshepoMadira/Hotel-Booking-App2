@@ -1,154 +1,118 @@
 
 
-.booking-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
-  color: #333;
-}
-
-h1 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #2c3e50;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #34495e;
-}
-
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #34495e;
-}
-
-p {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #666;
-}
-
-.room-detailss {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.room-image-containers {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.room-images {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.room-descriptions {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-.room-prices {
-  font-weight: bold;
-  color: #726555; 
-  margin: 10px 0;
-}
-
 form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
-label {
+form label {
   display: block;
   margin-bottom: 15px;
   font-size: 1rem;
   color: #333;
+  font-weight: 500;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"] {
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"] {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding: 12px;
+  margin-top: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 1rem;
+  color: #555;
+  transition: border-color 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus {
-  border-color: #3498db;
+form input[type="text"]::placeholder,
+form input[type="email"]::placeholder,
+form input[type="tel"]::placeholder {
+  color: #999;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="tel"]:focus {
+  border-color: #726555;
   outline: none;
 }
 
-
-
-.confirm-booking{
-  background-color: #726555;
-
+form p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
 }
-.confirm-booking:hover {
+
+form .room-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+form .room-controls button {
+  padding: 8px 12px;
+  background-color: #726555;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+form .room-controls button:hover {
   background-color: #312c25;
 }
 
-button[type="submit"] {
+form .room-controls span {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.confirm-bookingplatfrom {
   width: 100%;
   padding: 15px;
-  font-size: 1.2rem;
+  background-color: #666;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
   margin-top: 20px;
 }
 
-
-label > button {
-  background-color: #726555;
-  padding: 5px 10px;
-  font-size: 0.9rem;
+.confirm-bookingplatfrom:hover {
+  background-color: #333;
 }
 
-label > button:hover {
-  background-color: #312c25;
-}
-
-label > span {
-  margin: 0 10px;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
 
 @media (max-width: 768px) {
-  .booking-container {
-    padding: 10px;
+  .bookingplatform-container {
+    padding: 15px;
   }
 
-  h1 {
+  .bookingplatform-container h1 {
     font-size: 2rem;
   }
 
-  h2 {
-    font-size: 1.5rem;
+  .rooms-card {
+    flex-direction: column;
   }
 
-  h3 {
-    font-size: 1.2rem;
+  .rooms-image-container {
+    flex: none;
+    height: 200px; 
   }
 
-  .room-detailss {
+  .rooms-details {
+    flex: none;
     padding: 15px;
   }
 
@@ -156,8 +120,163 @@ label > span {
     padding: 15px;
   }
 
-  button[type="submit"] {
+  form label {
+    font-size: 0.9rem;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"] {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  form .room-controls button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  form .room-controls span {
+    font-size: 1rem;
+  }
+
+  .confirm-bookingplatfrom {
     padding: 12px;
     font-size: 1rem;
   }
+}
+
+@media (max-width: 480px) {
+  .bookingplatform-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .rooms-card {
+    margin-bottom: 15px;
+  }
+
+  .rooms-image-container {
+    height: 150px;
+  }
+
+  .rooms-details h3 {
+    font-size: 1.2rem;
+  }
+
+  .rooms-description {
+    font-size: 0.9rem;
+  }
+
+  .rooms-price {
+    font-size: 0.9rem;
+  }
+
+  .amenities-hotel {
+    gap: 8px;
+  }
+
+  .amenity-item {
+    font-size: 0.8rem;
+  }
+
+  .amenity-item svg {
+    font-size: 16px;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  form label {
+    font-size: 0.8rem;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="tel"] {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  form .room-controls button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  form .room-controls span {
+    font-size: 0.9rem;
+  }
+
+  .confirm-bookingplatfrom {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+.quantity-button {
+  padding: 8px 12px;
+  background-color: #666;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-button:hover {
+  background-color: #333;
+}
+
+.quantity-value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0 10px;
+}
+
+
+@media (max-width: 768px) {
+  .quantity-button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .quantity-value {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quantity-button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  .quantity-value {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+.home-arrow {
+  position: fixed;
+  top: 20px; 
+  left: 20px; 
+  cursor: pointer; 
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 50%;
+  padding: 10px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  transition: background-color 0.3s ease; 
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.home-arrow:hover {
+  background-color: rgba(255, 255, 255, 1); 
 }

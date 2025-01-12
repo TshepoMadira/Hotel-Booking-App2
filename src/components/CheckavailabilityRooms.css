@@ -1,5 +1,6 @@
 .checkavailability-container {
   padding: 20px;
+  margin-top: 50px;
 }
 
 .booking-form {
@@ -21,7 +22,7 @@
 
 .check-availability-button {
   padding: 10px 20px;
-  background-color: #726555;
+  background-color: #666;
   color: white;
   border: none;
   border-radius: 5px;
@@ -29,7 +30,7 @@
 }
 
 .check-availability-button:hover {
-  background-color: #312c25;
+  background-color: #333;
 }
 
 .rooms-list {
@@ -93,7 +94,7 @@
 
 .booknow-button {
   padding: 10px 20px;
-  background-color: #726555;
+  background-color: #666;
   color: white;
   border: none;
   border-radius: 5px;
@@ -102,7 +103,7 @@
 }
 
 .booknow-button:hover {
-  background-color: #312c25;
+  background-color: #333;
 }
 
 
@@ -122,6 +123,27 @@
 
 .ratings span {
   margin-left: 5px;
+}
+
+
+.amenities-hotel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.amenity-item svg {
+  font-size: 20px;
+  color: #666; 
 }
 
 
