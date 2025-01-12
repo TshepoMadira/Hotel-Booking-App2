@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBookingDetails } from '../Redux/bookingSlice';
+import { FaArrowLeft, FaWifi, FaSwimmingPool, FaParking, FaUtensils, FaTv } from 'react-icons/fa';
 import { db } from './Firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import "./BookingPlatform.css";
+import './BookingPlatform.css';
 
 const BookingPlatform = () => {
   const dispatch = useDispatch();
@@ -22,15 +23,15 @@ const BookingPlatform = () => {
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [rooms, setRooms] = useState(1); 
-  const [adults, setAdults] = useState(bookingDetails.adults || 1); 
+  const [rooms, setRooms] = useState(1);
+  const [adults, setAdults] = useState(bookingDetails.adults || 1);
   const [children, setChildren] = useState(bookingDetails.children || 0);
-  const [roomDetails, setRoomDetails] = useState(null); 
- 
+  const [roomDetails, setRoomDetails] = useState(null);
+
   useEffect(() => {
     const fetchRoomDetails = async () => {
       if (roomId) {
-        const roomRef = doc(db, "accommodations", roomId);
+        const roomRef = doc(db, 'accommodations', roomId);
         const roomSnap = await getDoc(roomRef);
         if (roomSnap.exists()) {
           setRoomDetails({ id: roomSnap.id, ...roomSnap.data() });
@@ -41,7 +42,7 @@ const BookingPlatform = () => {
   }, [roomId]);
 
   const calculateBookingAmount = (rooms, roomPrice) => {
-    return roomPrice * rooms; 
+    return roomPrice * rooms;
   };
 
   const handleSubmit = (e) => {
@@ -52,7 +53,7 @@ const BookingPlatform = () => {
     }
 
     const bookingAmount = calculateBookingAmount(rooms, roomPrice);
-    console.log("Rooms:", rooms, "Booking Amount:", bookingAmount);
+    console.log('Rooms:', rooms, 'Booking Amount:', bookingAmount);
 
     const bookingData = {
       fullName: `${name} ${surname}`,
@@ -64,7 +65,7 @@ const BookingPlatform = () => {
       numChildren: children,
       bookingAmount: bookingAmount,
     };
-    
+
     dispatch(setBookingDetails({ roomId, checkIn, checkOut, adults, children }));
     navigate('/confirmbooking', { state: bookingData });
   };
@@ -73,24 +74,44 @@ const BookingPlatform = () => {
     return name && surname && email && phone;
   };
 
+  const getRoomAmenities = () => {
+    const amenities = [
+      { icon: <FaWifi />, label: 'Free Wi-Fi' },
+      { icon: <FaSwimmingPool />, label: 'Pool' },
+      { icon: <FaParking />, label: 'Parking' },
+      { icon: <FaUtensils />, label: 'Restaurant' },
+      { icon: <FaTv />, label: 'TV' },
+    ];
+    return amenities;
+  };
+
   return (
-    <div className="booking-container">
-      <button className="back-buttonnn" onClick={() => navigate('/checkavailabilityrooms')}>
-        &#8592; 
-      </button>
+    <div className="bookingplatform-container">
+     
+      <div className="home-arrow" onClick={() => navigate('/checkavailabilityrooms')}>
+        <FaArrowLeft size={24} />
+      </div>
 
       <h1>Booking Form</h1>
 
-     
       {roomDetails && (
-        <div className="room-detailss">
-          <h2>Room Details</h2>
-          <div className="room-image-containers">
-            <img src={roomDetails.main_image} alt={roomDetails.name} className="room-images" />
+        <div className="rooms-card">
+          <div className="rooms-image-container">
+            <img src={roomDetails.main_image} alt={roomDetails.name} className="rooms-image" />
           </div>
-          <h3>{roomDetails.name}</h3>
-          <p className="room-descriptions">{roomDetails.description}</p>
-          <p className="room-prices">Price: R{roomDetails.price}</p>
+          <div className="rooms-details">
+            <h3>{roomDetails.name}</h3>
+            <p className="rooms-description">{roomDetails.description}</p>
+            <p className="rooms-price">Price: R{roomDetails.price}</p>
+            <div className="amenities-hotel">
+              {getRoomAmenities().map((amenity, index) => (
+                <div key={index} className="amenity-item">
+                  {amenity.icon}
+                  <span>{amenity.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
@@ -98,7 +119,7 @@ const BookingPlatform = () => {
         <p>Room ID: {roomId}</p>
         <p>Check-in Date: {checkIn}</p>
         <p>Check-out Date: {checkOut}</p>
-        
+
         <label>
           First Name:
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -118,26 +139,64 @@ const BookingPlatform = () => {
 
         <label>
           Number of Rooms:
-          <button type="button" onClick={() => setRooms(Math.max(1, rooms + 1))}>+</button>
-          <span>{rooms}</span>
-          <button type="button" onClick={() => setRooms(Math.max(1, rooms - 1))}>-</button>
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setRooms(Math.max(1, rooms - 1))}
+          >
+            -
+          </button>
+          <span className="quantity-value">{rooms}</span>
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setRooms(rooms + 1)}
+          >
+            +
+          </button>
         </label>
 
         <label>
           Number of Adults:
-          <button type="button" onClick={() => setAdults(Math.max(1, adults + 1))}>+</button>
-          <span>{adults}</span>
-          <button type="button" onClick={() => setAdults(Math.max(1, adults - 1))}>-</button>
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setAdults(Math.max(1, adults - 1))}
+          >
+            -
+          </button>
+          <span className="quantity-value">{adults}</span>
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setAdults(adults + 1)}
+          >
+            +
+          </button>
         </label>
 
         <label>
           Number of Children:
-          <button type="button" onClick={() => setChildren(Math.max(0, children + 1))}>+</button>
-          <span>{children}</span>
-          <button type="button" onClick={() => setChildren(Math.max(0, children - 1))}>-</button>
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setChildren(Math.max(0, children - 1))}
+          >
+            -
+          </button>
+          <span className="quantity-value">{children}</span>
+          <button
+            type="button"
+            className="quantity-button"
+            onClick={() => setChildren(children + 1)}
+          >
+            +
+          </button>
         </label>
 
-        <button className="confirm-booking" type="submit">Confirm Booking</button>
+        <button className="confirm-bookingplatfrom" type="submit">
+          Confirm Booking
+        </button>
       </form>
     </div>
   );
