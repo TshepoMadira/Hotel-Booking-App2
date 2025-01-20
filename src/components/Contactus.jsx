@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom"; 
 import './Contact.css';
 
 function Contactus() {
@@ -10,7 +10,7 @@ function Contactus() {
     message: "",
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +45,7 @@ function Contactus() {
 
   return (
     <section id="contact">
-      {/* Arrow to Home */}
+    
       <div className="home-arrow" onClick={() => navigate("/")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
