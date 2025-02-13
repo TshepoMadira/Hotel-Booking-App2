@@ -11,7 +11,7 @@ const Navbar = ({ isHomepage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { logout } = useAuth();
+  const { logout, isAuthenticated } = useAuth(); 
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -25,7 +25,6 @@ const Navbar = ({ isHomepage }) => {
     if (isHomepage) {
       window.addEventListener('scroll', handleScroll);
     }
-
     return () => {
       if (isHomepage) {
         window.removeEventListener('scroll', handleScroll);
@@ -56,17 +55,15 @@ const Navbar = ({ isHomepage }) => {
     <nav className={`navbar ${isHomepage && scrolling ? 'scrolled' : ''}`}>
       <div className="nav-content">
       
-       
-
-     
         <ul className="nav-links">
-          <li><Link to="/signup">Signup</Link></li>
+      
+          {!isAuthenticated && <li><Link to="/signup">Signup</Link></li>}
           <li><Link to="/gallery">Gallery</Link></li>
           <li><Link to="/aboutus">About Us</Link></li>
           <li><Link to="/contactus">Contact Us</Link></li>
         </ul>
 
-    
+   
         <div className="hamburger-container">
           <div className="hamburger" onClick={toggleMenu}>
             <div className="line"></div>
@@ -74,21 +71,24 @@ const Navbar = ({ isHomepage }) => {
             <div className="line"></div>
           </div>
 
-         
+     
           <div className={`hamburger-menu ${isMenuOpen ? 'open' : ''}`}>
             <ul>
+             
               <li>
                 <button onClick={handleProfileClick} className="profile-btn">
                   <FaUser className="menu-icon" />
                   Profile
                 </button>
               </li>
+        
               <li>
                 <button onClick={handleAdminClick} className="admin-btn">
                   <FaUserCog className="menu-icon" />
                   Admin
                 </button>
               </li>
+           
               <li>
                 <button onClick={handleLogout} className="logout-btn">
                   <FaSignOutAlt className="menu-icon" />

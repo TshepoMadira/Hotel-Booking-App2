@@ -4,12 +4,13 @@ import PayPalButton from './PayPalButton';
 import { db } from './Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { FaArrowLeft, FaUser, FaCalendarCheck, FaBed, FaUsers, FaChild, FaMoneyBillAlt } from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './ConfirmBooking.css';
 
 function ConfirmBooking() {
   const location = useLocation();
   const navigate = useNavigate();
-
   const {
     fullName,
     checkinDate,
@@ -21,12 +22,12 @@ function ConfirmBooking() {
     bookingAmount,
   } = location.state || {};
 
+  const [showReviewForm, setShowReviewForm] = useState(false);
   const [review, setReview] = useState('');
-  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const [rating, setRating] = useState(0);
 
   const handleSuccess = async (details) => {
     console.log('Payment successful!', details);
-
     const bookingData = {
       fullName,
       checkinDate,
@@ -37,51 +38,70 @@ function ConfirmBooking() {
       numChildren,
       bookingAmount,
       paymentDetails: details,
-      review: reviewSubmitted ? review : null,
     };
 
     try {
       const bookingsCollection = collection(db, 'bookings');
       await addDoc(bookingsCollection, bookingData);
       console.log('Booking successfully saved to Firebase:', bookingData);
-      navigate('/userprofile');
+
+      toast.success('Payment Successful!', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      // Show the review form after successful payment
+      setShowReviewForm(true);
     } catch (error) {
       console.error('Error saving booking to Firebase:', error);
-    }
-  };
-
-  const handleReviewChange = (e) => {
-    setReview(e.target.value);
-  };
-
-  const handleReviewSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const reviewsCollection = collection(db, 'reviews');
-      await addDoc(reviewsCollection, {
-        review,
-        fullName,
-        bookingDetails: {
-          checkinDate,
-          checkoutDate,
-          roomType,
-          numRooms,
-          numAdults,
-          numChildren,
-          bookingAmount,
-        },
+      toast.error('Error saving booking. Please try again.', {
+        position: 'top-center',
       });
-      console.log('Review submitted:', review);
-      setReviewSubmitted(true);
-      setReview('');
-    } catch (error) {
-      console.error('Error saving review to Firestore:', error);
     }
   };
 
   const handleBack = () => {
     navigate('/bookingplatform');
+  };
+
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+
+    const reviewData = {
+      fullName,
+      review,
+      rating,
+      date: new Date().toISOString(),
+    };
+
+    try {
+      const reviewsCollection = collection(db, 'reviews');
+      await addDoc(reviewsCollection, reviewData);
+      console.log('Review successfully saved to Firebase:', reviewData);
+
+      toast.success('Review Submitted!', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      // Redirect to user profile after submitting the review
+      setTimeout(() => {
+        navigate('/userprofile');
+      }, 3000);
+    } catch (error) {
+      console.error('Error saving review to Firebase:', error);
+      toast.error('Error submitting review. Please try again.', {
+        position: 'top-center',
+      });
+    }
   };
 
   if (!location.state) {
@@ -90,22 +110,14 @@ function ConfirmBooking() {
 
   return (
     <div className="confirmation-container">
-    
-      <div className="home-arrow" onClick={() => navigate('/checkavailabilityrooms')}>
+      <div className="home-arrow" onClick={handleBack}>
         <FaArrowLeft size={24} />
       </div>
-
       <h2>Confirm Booking</h2>
 
-      
       <div className="booking-card">
-      
         <div className="wave-container">
-          <svg
-            viewBox="0 0 500 150"
-            preserveAspectRatio="none"
-            className="wave-svg"
-          >
+          <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="wave-svg">
             <path
               d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
               className="wave-path"
@@ -113,7 +125,6 @@ function ConfirmBooking() {
           </svg>
         </div>
 
-      
         <div className="booking-details">
           <div className="detail-item">
             <FaUser className="detail-icon" />
@@ -150,25 +161,57 @@ function ConfirmBooking() {
         </div>
       </div>
 
+      {!showReviewForm && !toast.isActive('payment-success') && (
+        <PayPalButton amount={bookingAmount.toFixed(2)} onSuccess={handleSuccess} />
+      )}
 
-      <form onSubmit={handleReviewSubmit} className="review-form">
-        <h3>Leave a Review</h3>
-        <textarea
-          value={review}
-          onChange={handleReviewChange}
-          placeholder="Write your review here..."
-          rows="4"
-          required
-        />
-        <button className="submit-review" type="submit">
-          Submit Review
-        </button>
-      </form>
+      {showReviewForm && (
+        <div className="review-form">
+          <h3>Leave a Review</h3>
+          <form onSubmit={handleReviewSubmit}>
+            <div className="form-group">
+              <label htmlFor="review">Your Review:</label>
+              <textarea
+                id="review"
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="rating">Rating:</label>
+              <select
+                id="rating"
+                value={rating}
+                onChange={(e) => setRating(Number(e.target.value))}
+                required
+              >
+                <option value={0}>Select Rating</option>
+                <option value={1}>1 - Poor</option>
+                <option value={2}>2 - Fair</option>
+                <option value={3}>3 - Good</option>
+                <option value={4}>4 - Very Good</option>
+                <option value={5}>5 - Excellent</option>
+              </select>
+            </div>
+            <button type="submit" className="submit-review-btn">
+              Submit Review
+            </button>
+          </form>
+        </div>
+      )}
 
-      {reviewSubmitted && <p className="review-success">Thank you for your review!</p>}
-
-      
-      <PayPalButton amount={bookingAmount.toFixed(2)} onSuccess={handleSuccess} />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

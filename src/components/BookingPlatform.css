@@ -280,3 +280,8 @@ form .room-controls span {
 .home-arrow:hover {
   background-color: rgba(255, 255, 255, 1); 
 }
+
+input[readOnly] {
+  background-color: #f0f0f0; 
+  cursor: not-allowed; 
+}

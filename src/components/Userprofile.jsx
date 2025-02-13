@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { updateUserProfile } from '../Redux/userSlice';
 import { setFavorites } from '../Redux/Favoriteslice';
 import { db } from './Firebase';
@@ -13,7 +13,8 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const favorites = useSelector((state) => state.favorites?.favoriteRoomIds || []);
-  const [name, setName] = useState(user.name || '');
+  const [firstName, setFirstName] = useState(user.firstName || '');
+  const [lastName, setLastName] = useState(user.lastName || '');
   const [phone, setPhone] = useState(user.phone || '');
   const [loading, setLoading] = useState(true);
   const [favoriteRooms, setFavoriteRooms] = useState([]);
@@ -26,14 +27,13 @@ const UserProfile = () => {
         setLoading(false);
         return;
       }
-
       try {
         const userDoc = await getDoc(doc(db, 'users', user.id));
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setName(userData.name || `${userData.firstName} ${userData.lastName}`);
+          setFirstName(userData.firstName || '');
+          setLastName(userData.lastName || '');
           setPhone(userData.phone || '');
-
           if (userData.favoriteRoomIds) {
             dispatch(setFavorites(userData.favoriteRoomIds));
             fetchFavoriteRooms(userData.favoriteRoomIds);
@@ -70,7 +70,6 @@ const UserProfile = () => {
         console.error('User email is null or undefined');
         return;
       }
-
       try {
         const bookingsCollection = collection(db, 'bookings');
         const normalizedUserEmail = user.email.trim().toLowerCase();
@@ -93,19 +92,17 @@ const UserProfile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-
     if (!user.id) {
       console.error('User ID is null or undefined during update');
       alert('Error: User ID is not available. Please log in again.');
       return;
     }
-
-    dispatch(updateUserProfile({ name, phone }));
-
+    dispatch(updateUserProfile({ firstName, lastName, phone }));
     try {
       const userRef = doc(db, 'users', user.id);
       await updateDoc(userRef, {
-        name,
+        firstName,
+        lastName,
         phone,
       });
       alert('Profile updated successfully!');
@@ -120,19 +117,27 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-container">
-
       <div className="home-arrow" onClick={() => navigate('/confirmbooking')}>
         <FaArrowLeft size={24} />
       </div>
-
       <h1 className="user-profile-title">User Profile</h1>
       <form className="user-profile-form" onSubmit={handleUpdateProfile}>
         <label className="user-profile-label">
-          Name:
+          First Name:
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className="user-profile-input"
+            required
+          />
+        </label>
+        <label className="user-profile-label">
+          Last Name:
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             className="user-profile-input"
             required
           />
@@ -158,7 +163,6 @@ const UserProfile = () => {
         </label>
         <button className="user-profile-button" type="submit">Update Profile</button>
       </form>
-
       <div className="booking-history">
         <h2>Booking History</h2>
         {bookingHistory.length > 0 ? (
@@ -177,7 +181,6 @@ const UserProfile = () => {
           <p>You have no booking history.</p>
         )}
       </div>
-
       <div className="room-favorites">
         <h2>Favorite Accommodations</h2>
         {favoriteRooms.length > 0 ? (

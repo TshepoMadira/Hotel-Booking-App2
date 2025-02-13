@@ -3,8 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBookingDetails } from '../Redux/bookingSlice';
 import { FaArrowLeft, FaWifi, FaSwimmingPool, FaParking, FaUtensils, FaTv } from 'react-icons/fa';
-import { db } from './Firebase';
+import { db, auth } from './Firebase'; // Import auth from Firebase
 import { doc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 import './BookingPlatform.css';
 
 const BookingPlatform = () => {
@@ -27,7 +28,36 @@ const BookingPlatform = () => {
   const [adults, setAdults] = useState(bookingDetails.adults || 1);
   const [children, setChildren] = useState(bookingDetails.children || 0);
   const [roomDetails, setRoomDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // Fetch user data from Firestore
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setName(userData.firstName); // Set first name
+            setSurname(userData.lastName); // Set last name
+            setEmail(userData.email); // Set email
+          } else {
+            console.log('User data not found in Firestore.');
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      } else {
+        // Redirect to login if user is not authenticated
+        navigate('/login');
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
+
+  // Fetch room details
   useEffect(() => {
     const fetchRoomDetails = async () => {
       if (roomId) {
@@ -85,9 +115,12 @@ const BookingPlatform = () => {
     return amenities;
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="bookingplatform-container">
-     
       <div className="home-arrow" onClick={() => navigate('/checkavailabilityrooms')}>
         <FaArrowLeft size={24} />
       </div>
@@ -116,25 +149,41 @@ const BookingPlatform = () => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <p>Room ID: {roomId}</p>
         <p>Check-in Date: {checkIn}</p>
         <p>Check-out Date: {checkOut}</p>
 
         <label>
           First Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+          <input
+            type="text"
+            value={name}
+            readOnly // Make the field read-only
+          />
         </label>
         <label>
           Surname:
-          <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} required />
+          <input
+            type="text"
+            value={surname}
+            readOnly // Make the field read-only
+          />
         </label>
         <label>
           Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            value={email}
+            readOnly // Make the field read-only
+          />
         </label>
         <label>
           Phone Number:
-          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
         </label>
 
         <label>

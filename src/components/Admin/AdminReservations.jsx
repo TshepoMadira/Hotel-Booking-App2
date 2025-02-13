@@ -1,13 +1,68 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../Firebase"; 
 import { collection, getDocs } from "firebase/firestore"; 
-import './Admin.css'
-
+import { auth } from "../Firebase"; 
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; 
+import './Admin.css';
 
 const AdminReservations = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false); 
+  const [userLoading, setUserLoading] = useState(true); 
+
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    const checkAdminRole = async (user) => {
+      if (!user) {
+        setIsAdmin(false);
+        return;
+      }
+
+      try {
+        
+        const usersCollection = collection(db, "users");
+        const querySnapshot = await getDocs(usersCollection);
+
+        let isAdminUser = false;
+        querySnapshot.forEach((doc) => {
+          if (doc.id === user.uid && doc.data().role === "admin") {
+            isAdminUser = true;
+          }
+        });
+
+        if (isAdminUser) {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+          setError("You are not authorized to access this page. Only admins can view reservations.");
+        }
+      } catch (err) {
+        console.error("Error checking admin role:", err);
+        setIsAdmin(false);
+        setError("Failed to verify your admin status. Please try again later.");
+      } finally {
+        setUserLoading(false);
+      }
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        checkAdminRole(user);
+      } else {
+        
+        setIsAdmin(false);
+        setError("Please log in to access this page.");
+        setUserLoading(false);
+        navigate("/"); 
+      }
+    });
+
+    return () => unsubscribe(); 
+  }, [navigate]);
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -26,15 +81,27 @@ const AdminReservations = () => {
       }
     };
 
-    fetchReservations();
-  }, []);
+    if (isAdmin) {
+      fetchReservations();
+    }
+  }, [isAdmin]);
 
-  if (loading) {
-    return <div>Loading reservations...</div>;
+  if (userLoading) {
+    return <div className="loading-message">Checking your credentials...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className="error-container">
+        <h2>Access Denied</h2>
+        <p>{error}</p>
+        <button onClick={() => navigate("/")}>Go Back to Home</button>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return <div className="loading-message">Loading reservations...</div>;
   }
 
   return (

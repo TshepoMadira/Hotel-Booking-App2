@@ -7,6 +7,10 @@ import { setUser } from '../Redux/userSlice';
 import { useAuth } from '../components/AuthContext';
 import './Login.css';
 
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Login = () => {
   const [form, setForm] = useState({
     email: '',
@@ -39,7 +43,6 @@ const Login = () => {
       if (userDoc.exists()) {
         const userData = userDoc.data();
 
-       
         dispatch(setUser({
           id: user.uid,
           email: user.email,
@@ -47,20 +50,22 @@ const Login = () => {
           phone: userData.phone,
         }));
 
-      
         login();
 
-       
         if (userData.role === 'admin') {
+          toast.success('Login successful! Redirecting to Admin Dashboard.');
           navigate('/adminreservations');
         } else {
+          toast.success('Login successful! Redirecting to Room Availability.');
           navigate('/checkavailabilityrooms');
         }
       } else {
         setError('User document does not exist.');
+        toast.error('User document does not exist.');
       }
     } catch (error) {
       setError(error.message);
+      toast.error(error.message);  
     }
   };
 
@@ -99,6 +104,9 @@ const Login = () => {
       <div className="signup-link-container">
         <a className='signup-link' href="/signup">Need an account? Sign Up</a>
       </div>
+
+     
+      <ToastContainer />
     </div>
   );
 };

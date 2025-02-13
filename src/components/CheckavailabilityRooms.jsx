@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./Firebase";
-import { collection, getDocs, query, where, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../Redux/Favoriteslice.js";
 import { setRating, initializeRatings } from "../Redux/ratingSlice.js";
 import Rating from "../components/Rating";
 import "./CheckavailabilityRooms.css";
-
+import { FaArrowLeft } from 'react-icons/fa'; 
 import { FaWifi, FaSwimmingPool, FaParking, FaUtensils, FaTv } from "react-icons/fa";
 
 const CheckavailabilityRooms = () => {
@@ -95,9 +95,19 @@ const CheckavailabilityRooms = () => {
       dispatch(setRating({ roomId, rating: newRating }));
 
       const ratingRef = doc(db, "ratings", roomId);
-      await updateDoc(ratingRef, {
-        rating: newRating,
-      });
+      const ratingDoc = await getDoc(ratingRef);
+
+      if (ratingDoc.exists()) {
+        // Document exists, update it
+        await updateDoc(ratingRef, {
+          rating: newRating,
+        });
+      } else {
+        // Document does not exist, create it
+        await setDoc(ratingRef, {
+          rating: newRating,
+        });
+      }
 
       console.log("Rating updated in Firestore and Redux.");
     } catch (error) {
@@ -118,6 +128,9 @@ const CheckavailabilityRooms = () => {
 
   return (
     <div className="checkavailability-container">
+      <div className="home-arrow" onClick={() => navigate('/')}>
+              <FaArrowLeft size={24} />
+            </div>
       <div className="rooms-list">
         <h2>Available Rooms</h2>
         <div className="date-pickers">
