@@ -44,7 +44,7 @@ const Navbar = ({ isHomepage }) => {
   };
 
   const handleProfileClick = () => {
-    navigate('/userprofile');
+    navigate('/userprofile', { state: { fromHamburger: true } }); // Pass state to indicate navigation from hamburger
   };
 
   const toggleMenu = () => {

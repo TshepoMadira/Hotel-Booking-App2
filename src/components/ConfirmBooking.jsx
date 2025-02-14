@@ -39,13 +39,13 @@ function ConfirmBooking() {
       bookingAmount,
       paymentDetails: details,
     };
-
+  
     try {
       const bookingsCollection = collection(db, 'bookings');
       await addDoc(bookingsCollection, bookingData);
       console.log('Booking successfully saved to Firebase:', bookingData);
-
-      toast.success('Payment Successful!', {
+  
+      toast.success('Thanks for paying here at DreamScape Hotel!', {
         position: 'top-center',
         autoClose: 3000,
         hideProgressBar: false,
@@ -53,8 +53,7 @@ function ConfirmBooking() {
         pauseOnHover: true,
         draggable: true,
       });
-
-      // Show the review form after successful payment
+  
       setShowReviewForm(true);
     } catch (error) {
       console.error('Error saving booking to Firebase:', error);
@@ -92,7 +91,7 @@ function ConfirmBooking() {
         draggable: true,
       });
 
-      // Redirect to user profile after submitting the review
+      
       setTimeout(() => {
         navigate('/userprofile');
       }, 3000);
